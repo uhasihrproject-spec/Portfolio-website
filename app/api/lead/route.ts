@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("Missing RESEND_API_KEY environment variable.");
+  }
+
+  return new Resend(apiKey);
+}
 
 function safe(v: unknown) {
   return String(v ?? "").trim();
@@ -22,6 +30,7 @@ function wantPhrase(service: string) {
 
 export async function POST(req: Request) {
   try {
+    const resend = getResendClient();
     const body = await req.json();
 
     const name = safe(body.name);
