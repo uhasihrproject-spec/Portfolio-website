@@ -131,10 +131,10 @@ export default function Process() {
                 fill
                 sizes="100vw"
                 priority={i === 0}
-                className="object-cover blur-2xl scale-110"
+                className="object-cover blur scale-110"
               />
               {/* extra soft darkening so text stays premium */}
-              <div className="absolute inset-0 bg-black/50" />
+              <div className="absolute inset-0 bg-black/70" />
             </div>
           );
         })}
