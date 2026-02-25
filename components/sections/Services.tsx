@@ -413,7 +413,7 @@ export default function ServicesPricingStickyScroll() {
                 className={cx(
                   "rounded-full px-4 py-2 text-sm font-semibold border transition",
                   is
-                    ? "border-white/20 bg-white/10 text-white"
+                    ? "border-white/20 bg-[var(--mint)] text-black"
                     : "border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
                 )}
               >
