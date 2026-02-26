@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import { PROJECTS, getProjectCover } from "@/data/projects";
 import { TEAM_MEMBERS } from "@/data/team";
+import ContactFlipCards from "./contact-flip-cards";
 
 export default async function TeamMemberPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
   const p = await Promise.resolve(params);
@@ -62,6 +63,8 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
                 <a href={`mailto:${member.email}`} className="inline-flex items-center rounded-full border border-violet-200 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-violet-50 transition">Email</a>
               ) : null}
             </div>
+
+            <ContactFlipCards phone={member.phone} whatsapp={member.whatsapp} />
           </div>
         </div>
 
