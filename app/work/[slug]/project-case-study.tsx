@@ -288,6 +288,22 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 <Tag key={t}>{t}</Tag>
               ))}
             </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href={`/contact?subject=${encodeURIComponent(project.title)}&message=${encodeURIComponent(`Hi, I want a project like ${project.title}.`)}`}
+                className="inline-flex rounded-full bg-[var(--mint)] px-6 py-3 text-sm font-semibold text-white"
+              >
+                Start similar project
+              </Link>
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                className="inline-flex rounded-full border border-violet-200 bg-white px-6 py-3 text-sm font-semibold text-slate-800"
+              >
+                Open preview
+              </button>
+            </div>
           </motion.div>
 
           {/* mobile hero image (thumb) */}

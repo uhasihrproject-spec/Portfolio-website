@@ -9,18 +9,36 @@ export default function AboutPage() {
     <section className="relative overflow-hidden border-t border-violet-200">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(109,94,252,0.16),transparent_56%),radial-gradient(circle_at_88%_12%,rgba(59,130,246,0.14),transparent_46%)]" />
       <Container className="relative z-10 py-16 sm:py-20">
-        <FadeIn><Badge>ABOUT</Badge></FadeIn>
+        <FadeIn>
+          <Badge>ABOUT</Badge>
+        </FadeIn>
 
         <FadeIn delay={0.05}>
           <h1 className="mt-4 text-4xl sm:text-6xl font-semibold tracking-[-0.05em] text-slate-900">
-            Premium work, real people, clear process.
+            We build clear, useful digital products for real teams.
           </h1>
           <p className="mt-5 text-slate-600 max-w-3xl leading-relaxed">
-            Click any team member to open their individual profile page with their focus, approach, and direct contact path.
+            Prem Studio started with one simple belief: great design should make work easier, faster, and more confident. We work closely with founders,
+            schools, churches, and businesses to turn scattered ideas into polished websites, systems, and brand assets that people can actually use.
           </p>
         </FadeIn>
 
-        <div className="mt-12 space-y-4">
+        <FadeIn delay={0.1}>
+          <div className="mt-8 rounded-[26px] border border-violet-200 bg-white/90 p-6 sm:p-8 shadow-[0_15px_40px_rgba(79,70,229,0.12)]">
+            <p className="text-xs font-semibold tracking-[0.2em] text-slate-500">OUR STORY</p>
+            <p className="mt-4 max-w-4xl text-slate-600 leading-relaxed">
+              From small freelance projects to full product partnerships, our process has stayed consistent: understand the problem deeply, design with intention,
+              and launch with strong support. That is why clients return when they need their next website, visual campaign, or internal system.
+            </p>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.15}>
+          <h2 className="mt-14 text-2xl sm:text-3xl font-semibold tracking-[-0.03em] text-slate-900">Our team</h2>
+          <p className="mt-3 text-slate-600 max-w-3xl">Click any team member to open their profile and contact path.</p>
+        </FadeIn>
+
+        <div className="mt-8 space-y-4">
           {TEAM_MEMBERS.map((member, i) => (
             <FadeIn key={member.slug} delay={0.04 * i}>
               <Link href={`/team/${member.slug}`} className="group block rounded-[26px] border border-violet-200 bg-white/88 p-4 sm:p-5 shadow-[0_15px_40px_rgba(79,70,229,0.12)] transition hover:-translate-y-1">
