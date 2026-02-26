@@ -159,10 +159,10 @@ const PRICING: Record<string, Tier[]> = {
 
 function accentById(id: string) {
   const k = id.toLowerCase();
-  if (k.includes("web")) return "rgba(79,215,255,0.22)";
-  if (k.includes("graphic")) return "rgba(46,229,157,0.20)";
-  if (k.includes("brand")) return "rgba(255,180,140,0.18)";
-  if (k.includes("system")) return "rgba(140,160,255,0.18)";
+  if (k.includes("web")) return "rgba(109,94,252,0.22)";
+  if (k.includes("graphic")) return "rgba(59,130,246,0.20)";
+  if (k.includes("brand")) return "rgba(124,58,237,0.18)";
+  if (k.includes("system")) return "rgba(99,102,241,0.18)";
   return "rgba(255,255,255,0.12)";
 }
 
@@ -203,7 +203,7 @@ function Visual({
   return (
     <div className="absolute inset-0 flex items-center justify-center">
       <div
-        className="relative w-[92%] h-[92%] rounded-2xl border border-white/10 bg-white/5 overflow-hidden"
+        className="relative w-[92%] h-[92%] rounded-2xl border border-violet-200 bg-violet-50 overflow-hidden"
         style={{ ["--accent" as any]: accent }}
       >
         <div
@@ -214,11 +214,11 @@ function Visual({
         />
         <div className="absolute inset-0 opacity-[0.10] [background-image:linear-gradient(rgba(255,255,255,0.14)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.14)_1px,transparent_1px)] [background-size:72px_72px]" />
         <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6">
-          <p className="text-[11px] font-semibold tracking-[0.22em] text-white/55">MOCKUP</p>
-          <h4 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-white">{title}</h4>
-          <p className="mt-2 text-white/70">{subtitle}</p>
-          <p className="mt-4 text-xs text-white/55 break-all">
-            Add image: <span className="text-white/70">{src}</span>
+          <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-500">MOCKUP</p>
+          <h4 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-slate-900">{title}</h4>
+          <p className="mt-2 text-slate-600">{subtitle}</p>
+          <p className="mt-4 text-xs text-slate-500 break-all">
+            Add image: <span className="text-slate-600">{src}</span>
           </p>
         </div>
       </div>
@@ -349,13 +349,13 @@ export default function ServicesPricingStickyScroll() {
       <div className="mt-4 flex gap-2">
         <a
           href={`/contact?service=${encodeURIComponent(activeId)}&package=${encodeURIComponent(pkg)}`}
-          className="inline-flex w-full items-center justify-center rounded-full bg-[var(--mint)] px-5 py-2.5 text-sm font-semibold text-black hover:brightness-95 transition"
+          className="inline-flex w-full items-center justify-center rounded-full bg-[var(--mint)] px-5 py-2.5 text-sm font-semibold text-slate-900 hover:brightness-95 transition"
         >
           Request →
         </a>
         <a
           href={`/contact?service=${encodeURIComponent(activeId)}&package=custom`}
-          className="inline-flex w-full items-center justify-center rounded-full border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white/85 hover:bg-white/10 transition"
+          className="inline-flex w-full items-center justify-center rounded-full border border-violet-200 bg-violet-50 px-5 py-2.5 text-sm font-semibold text-slate-900 hover:bg-violet-100 transition"
         >
           Contact for price
         </a>
@@ -376,12 +376,12 @@ export default function ServicesPricingStickyScroll() {
   ];
 
   return (
-    <section className="relative border-t border-white/10">
+    <section className="relative border-t border-violet-200">
       {/* background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-white/70" />
         <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:220px_220px]" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,transparent_35%,rgba(0,0,0,0.55)_92%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,transparent_35%,rgba(255,255,255,0.38)_92%)]" />
       </div>
 
       <Container className="relative z-10 py-16 sm:py-20">
@@ -389,14 +389,14 @@ export default function ServicesPricingStickyScroll() {
         <div className="flex items-end justify-between gap-8 flex-wrap">
           <div className="max-w-2xl">
             <Badge>SERVICES</Badge>
-            <h2 className="mt-4 text-balance text-3xl sm:text-4xl font-semibold tracking-[-0.04em] text-white">
+            <h2 className="mt-4 text-balance text-3xl sm:text-4xl font-semibold tracking-[-0.04em] text-slate-900">
               Choose a service. Scroll the packages.
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-white/70 leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
               Service intro → package 1 → package 2 → custom. The sticky preview updates as each section hits the center.
             </p>
           </div>
-          <div className="text-xs font-semibold tracking-[0.22em] text-white/45">
+          <div className="text-xs font-semibold tracking-[0.22em] text-slate-400">
             SELECT • SCROLL • REQUEST
           </div>
         </div>
@@ -413,8 +413,8 @@ export default function ServicesPricingStickyScroll() {
                 className={cx(
                   "rounded-full px-4 py-2 text-sm font-semibold border transition",
                   is
-                    ? "border-white/20 bg-[var(--mint)] text-black"
-                    : "border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                    ? "border-violet-300 bg-violet-100 text-slate-900"
+                    : "border-violet-200 bg-violet-50 text-slate-600 hover:bg-violet-100 hover:text-slate-900"
                 )}
               >
                 {s.title}
@@ -423,7 +423,7 @@ export default function ServicesPricingStickyScroll() {
           })}
         </div>
 
-        <div className="mt-10 h-px w-full bg-white/10" />
+        <div className="mt-10 h-px w-full bg-violet-100" />
 
         {/* ═══ DESKTOP ═══════════════════════════════════════════════════════ */}
         <div className="hidden lg:grid lg:grid-cols-2 lg:gap-16 mt-12">
@@ -460,16 +460,16 @@ export default function ServicesPricingStickyScroll() {
                 })}
 
                 <div className="absolute inset-x-0 bottom-0 z-20 px-6 pb-6">
-                  <div className="rounded-2xl border border-white/10 bg-black/35 backdrop-blur-md p-5">
-                    <p className="text-[11px] font-semibold tracking-[0.22em] text-white/55">
+                  <div className="rounded-2xl border border-violet-200 bg-white/70 backdrop-blur-md p-5">
+                    <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-500">
                       {leftSlide.kind === "tier" ? "PACKAGE" : leftSlide.kind === "custom" ? "CUSTOM" : "SERVICE"}
                     </p>
                     <div className="mt-2 flex items-end justify-between gap-4">
                       <div className="min-w-0">
-                        <div className="text-base font-semibold text-white/90 truncate">{leftSlide.title}</div>
-                        <div className="mt-1 text-xs text-white/55 truncate">{leftSlide.subtitle}</div>
+                        <div className="text-base font-semibold text-slate-900/90 truncate">{leftSlide.title}</div>
+                        <div className="mt-1 text-xs text-slate-500 truncate">{leftSlide.subtitle}</div>
                       </div>
-                      <div className="text-lg font-semibold text-white whitespace-nowrap">
+                      <div className="text-lg font-semibold text-slate-900 whitespace-nowrap">
                         {leftSlide.kind === "tier" ? leftSlide.price : leftSlide.kind === "custom" ? "Contact" : ""}
                       </div>
                     </div>
@@ -484,19 +484,19 @@ export default function ServicesPricingStickyScroll() {
           <div ref={scrollRefDesktop} className="relative">
             <div data-activekey="intro" className="min-h-screen flex items-center py-32">
               <div className="max-w-lg">
-                <h3 className="text-3xl font-semibold text-white">
+                <h3 className="text-3xl font-semibold text-slate-900">
                   {activeService.title || "Web Design & Development"}
                 </h3>
-                <p className="mt-4 text-white/70">
+                <p className="mt-4 text-slate-600">
                   {activeService.subtitle || "Premium websites that load fast and feel expensive."}
                 </p>
-                <p className="mt-10 text-sm text-white/65">What you will get:</p>
+                <p className="mt-10 text-sm text-slate-600">What you will get:</p>
                 <div className="mt-4 grid gap-2 sm:grid-cols-2">
                   {(activeService.bullets?.length ? activeService.bullets : [
                     "Next.js builds", "Responsive layout", "Calm animations",
                     "Custom sections", "Speed + SEO basics", "Clean UI system",
                   ]).map((x: string) => (
-                    <div key={x} className="rounded-2xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-white/75">
+                    <div key={x} className="rounded-2xl border border-violet-200 bg-violet-50 px-3.5 py-2.5 text-sm text-slate-700">
                       <span className="text-[var(--mint)] font-semibold">•</span> {x}
                     </div>
                   ))}
@@ -507,17 +507,17 @@ export default function ServicesPricingStickyScroll() {
             {tiers.map((t) => (
               <div key={t.id} data-activekey={`tier:${t.id}`} className="min-h-screen flex items-center py-32">
                 <div className="max-w-lg">
-                  <p className="text-[11px] font-semibold tracking-[0.22em] text-white/55">PACKAGE</p>
-                  <h3 className="mt-2 text-3xl font-semibold text-white">{t.name}</h3>
-                  <p className="mt-4 text-white/70">{t.bestFor}</p>
+                  <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-500">PACKAGE</p>
+                  <h3 className="mt-2 text-3xl font-semibold text-slate-900">{t.name}</h3>
+                  <p className="mt-4 text-slate-600">{t.bestFor}</p>
                   <div className="mt-6 flex items-end justify-between gap-4">
-                    <p className="text-xs font-semibold tracking-[0.22em] text-white/45">STARTING AT</p>
-                    <p className="text-2xl font-semibold text-white">{t.price}</p>
+                    <p className="text-xs font-semibold tracking-[0.22em] text-slate-400">STARTING AT</p>
+                    <p className="text-2xl font-semibold text-slate-900">{t.price}</p>
                   </div>
-                  <p className="mt-10 text-sm text-white/65">What you will get:</p>
+                  <p className="mt-10 text-sm text-slate-600">What you will get:</p>
                   <div className="mt-4 grid gap-2 sm:grid-cols-2">
                     {t.includes.map((x) => (
-                      <div key={x} className="rounded-2xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-white/75">
+                      <div key={x} className="rounded-2xl border border-violet-200 bg-violet-50 px-3.5 py-2.5 text-sm text-slate-700">
                         <span className="text-[var(--mint)] font-semibold">•</span> {x}
                       </div>
                     ))}
@@ -528,24 +528,24 @@ export default function ServicesPricingStickyScroll() {
 
             <div data-activekey="custom" className="min-h-screen flex items-center py-32">
               <div className="max-w-lg">
-                <p className="text-[11px] font-semibold tracking-[0.22em] text-white/55">CUSTOM</p>
-                <h3 className="mt-2 text-3xl font-semibold text-white">Custom Plan</h3>
-                <p className="mt-4 text-white/70">
+                <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-500">CUSTOM</p>
+                <h3 className="mt-2 text-3xl font-semibold text-slate-900">Custom Plan</h3>
+                <p className="mt-4 text-slate-600">
                   If your scope is bigger (more pages, e-commerce, dashboards, automations), we'll quote based on requirements.
                 </p>
-                <p className="mt-10 text-sm text-white/65">What you will get:</p>
+                <p className="mt-10 text-sm text-slate-600">What you will get:</p>
                 <div className="mt-4 grid gap-2 sm:grid-cols-2">
                   {[
                     "Custom features + pages", "Integrations (payments, email, CRM)",
                     "Timeline-based pricing", "Design system options",
                     "Support + maintenance options", "Performance + SEO upgrades",
                   ].map((x) => (
-                    <div key={x} className="rounded-2xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-white/75">
+                    <div key={x} className="rounded-2xl border border-violet-200 bg-violet-50 px-3.5 py-2.5 text-sm text-slate-700">
                       <span className="text-[var(--mint)] font-semibold">•</span> {x}
                     </div>
                   ))}
                 </div>
-                <p className="mt-10 text-sm text-white/55">
+                <p className="mt-10 text-sm text-slate-500">
                   Prices are starting points — final quotes depend on scope, pages/features, and timeline.
                 </p>
               </div>
@@ -559,7 +559,7 @@ export default function ServicesPricingStickyScroll() {
           {/* Sticky image panel */}
           <div className="sticky top-[70px] z-30 pb-6 pt-6">
             <div
-              className="relative mx-auto w-full max-w-xl h-[320px] sm:h-[420px] rounded-2xl border border-white/10 bg-white/5 overflow-hidden"
+              className="relative mx-auto w-full max-w-xl h-[320px] sm:h-[420px] rounded-2xl border border-violet-200 bg-violet-50 overflow-hidden"
               style={{ ["--accent" as any]: accent }}
             >
               <div
@@ -590,15 +590,15 @@ export default function ServicesPricingStickyScroll() {
               })}
 
               <div className="absolute inset-x-0 bottom-0 z-20 p-4">
-                <div className="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md p-4">
+                <div className="rounded-2xl border border-violet-200 bg-white/80 backdrop-blur-md p-4">
                   <div className="flex items-end justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="text-[11px] font-semibold tracking-[0.22em] text-white/55">
+                      <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-500">
                         {leftSlide.kind === "tier" ? "PACKAGE" : leftSlide.kind === "custom" ? "CUSTOM" : "SERVICE"}
                       </p>
-                      <div className="mt-1 text-sm font-semibold text-white/90 truncate">{leftSlide.title}</div>
+                      <div className="mt-1 text-sm font-semibold text-slate-900/90 truncate">{leftSlide.title}</div>
                     </div>
-                    <div className="text-base font-semibold text-white whitespace-nowrap">
+                    <div className="text-base font-semibold text-slate-900 whitespace-nowrap">
                       {leftSlide.kind === "tier" ? leftSlide.price : leftSlide.kind === "custom" ? "Contact" : ""}
                     </div>
                   </div>
@@ -612,19 +612,19 @@ export default function ServicesPricingStickyScroll() {
           <div ref={scrollRefMobile} className="mt-10">
             <div data-activekey="intro" className="min-h-[100vh] flex items-center justify-center text-center px-4 py-20">
               <div className="max-w-md">
-                <h3 className="text-2xl font-semibold sm:text-3xl text-white">
+                <h3 className="text-2xl font-semibold sm:text-3xl text-slate-900">
                   {activeService.title || "Web Design & Development"}
                 </h3>
-                <p className="mt-4 text-white/70">
+                <p className="mt-4 text-slate-600">
                   {activeService.subtitle || "Premium websites that load fast and feel expensive."}
                 </p>
-                <p className="mt-10 text-sm text-white/65">What you will get:</p>
+                <p className="mt-10 text-sm text-slate-600">What you will get:</p>
                 <div className="mt-4 grid gap-2 text-left">
                   {(activeService.bullets?.length ? activeService.bullets : [
                     "Next.js builds", "Responsive layout", "Calm animations",
                     "Custom sections", "Speed + SEO basics", "Clean UI system",
                   ]).map((x: string) => (
-                    <div key={x} className="rounded-2xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-white/75">
+                    <div key={x} className="rounded-2xl border border-violet-200 bg-violet-50 px-3.5 py-2.5 text-sm text-slate-700">
                       <span className="text-[var(--mint)] font-semibold">•</span> {x}
                     </div>
                   ))}
@@ -635,13 +635,13 @@ export default function ServicesPricingStickyScroll() {
             {tiers.map((t) => (
               <div key={t.id} data-activekey={`tier:${t.id}`} className="min-h-[100vh] flex items-center justify-center text-center px-4 py-20">
                 <div className="max-w-md">
-                  <h3 className="text-2xl font-semibold sm:text-3xl text-white">{t.name}</h3>
-                  <p className="mt-4 text-white/70">{t.bestFor}</p>
-                  <p className="mt-4 text-xl font-semibold text-white">{t.price}</p>
-                  <p className="mt-10 text-sm text-white/65">What you will get:</p>
+                  <h3 className="text-2xl font-semibold sm:text-3xl text-slate-900">{t.name}</h3>
+                  <p className="mt-4 text-slate-600">{t.bestFor}</p>
+                  <p className="mt-4 text-xl font-semibold text-slate-900">{t.price}</p>
+                  <p className="mt-10 text-sm text-slate-600">What you will get:</p>
                   <div className="mt-4 grid gap-2 text-left">
                     {t.includes.map((x) => (
-                      <div key={x} className="rounded-2xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-white/75">
+                      <div key={x} className="rounded-2xl border border-violet-200 bg-violet-50 px-3.5 py-2.5 text-sm text-slate-700">
                         <span className="text-[var(--mint)] font-semibold">•</span> {x}
                       </div>
                     ))}
@@ -652,23 +652,23 @@ export default function ServicesPricingStickyScroll() {
 
             <div data-activekey="custom" className="min-h-[100vh] flex items-center justify-center text-center px-4 py-20">
               <div className="max-w-md">
-                <h3 className="text-2xl font-semibold sm:text-3xl text-white">Custom Plan</h3>
-                <p className="mt-4 text-white/70">
+                <h3 className="text-2xl font-semibold sm:text-3xl text-slate-900">Custom Plan</h3>
+                <p className="mt-4 text-slate-600">
                   Bigger scope? Extra features? Use "Contact for price" on the sticky card.
                 </p>
-                <p className="mt-10 text-sm text-white/65">What you will get:</p>
+                <p className="mt-10 text-sm text-slate-600">What you will get:</p>
                 <div className="mt-4 grid gap-2 text-left">
                   {[
                     "Custom features + pages", "Integrations (payments, email, CRM)",
                     "Timeline-based pricing", "Design system options",
                     "Support + maintenance options", "Performance + SEO upgrades",
                   ].map((x) => (
-                    <div key={x} className="rounded-2xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-white/75">
+                    <div key={x} className="rounded-2xl border border-violet-200 bg-violet-50 px-3.5 py-2.5 text-sm text-slate-700">
                       <span className="text-[var(--mint)] font-semibold">•</span> {x}
                     </div>
                   ))}
                 </div>
-                <p className="mt-10 text-sm text-white/55">
+                <p className="mt-10 text-sm text-slate-500">
                   Prices are starting points — final quotes depend on scope and timeline.
                 </p>
               </div>

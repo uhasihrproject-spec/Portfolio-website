@@ -24,25 +24,25 @@ export default function Process() {
       {
         t: "Discovery",
         d: "We clarify goals, audience, and style direction.",
-        accent: "rgba(79,215,255,0.22)",
+        accent: "rgba(109,94,252,0.22)",
         bgSrc: "/process/01.jpg",
       },
       {
         t: "Design",
         d: "We build clean layouts with premium hierarchy.",
-        accent: "rgba(255,180,140,0.18)",
+        accent: "rgba(124,58,237,0.18)",
         bgSrc: "/process/02.jpg",
       },
       {
         t: "Build",
         d: "Fast implementation with responsive polish.",
-        accent: "rgba(46,229,157,0.20)",
+        accent: "rgba(59,130,246,0.20)",
         bgSrc: "/process/03.jpg",
       },
       {
         t: "Launch",
         d: "Final QA, handover, and support.",
-        accent: "rgba(140,160,255,0.18)",
+        accent: "rgba(99,102,241,0.18)",
         bgSrc: "/process/04.jpg",
       },
     ],
@@ -111,7 +111,7 @@ export default function Process() {
   const dash = c * overall;
 
   return (
-    <section className="relative border-t border-white/10 overflow-hidden">
+    <section className="relative border-t border-violet-200 overflow-hidden">
       {/* FULL-SECTION blurred background that changes per step */}
       <div className="absolute inset-0">
         {steps.map((s, i) => {
@@ -134,7 +134,7 @@ export default function Process() {
                 className="object-cover blur scale-110"
               />
               {/* extra soft darkening so text stays premium */}
-              <div className="absolute inset-0 bg-black/70" />
+              <div className="absolute inset-0 bg-white/70" />
             </div>
           );
         })}
@@ -143,7 +143,7 @@ export default function Process() {
         <div
           className="absolute inset-0 transition-[opacity,background] duration-1000"
           style={{
-            background: `radial-gradient(circle at 30% 18%, ${accent}, rgba(0,0,0,0.72) 62%, rgba(0,0,0,0.82) 100%)`,
+            background: `radial-gradient(circle at 30% 18%, ${accent}, rgba(255,255,255,0.5) 62%, rgba(255,255,255,0.60) 100%)`,
             transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)",
           }}
         />
@@ -156,15 +156,15 @@ export default function Process() {
         <div className="flex items-end justify-between gap-8 flex-wrap">
           <div className="max-w-2xl">
             <Badge>PROCESS</Badge>
-            <h2 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white">
+            <h2 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-slate-900">
               Simple process. Clean delivery.
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-white/70 leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
               Cycles through each step, confirms completion with a tick, then restarts.
             </p>
           </div>
 
-          <div className="text-xs font-semibold tracking-[0.22em] text-white/45">
+          <div className="text-xs font-semibold tracking-[0.22em] text-slate-400">
             DISCOVER • DESIGN • BUILD • LAUNCH
           </div>
         </div>
@@ -211,10 +211,10 @@ export default function Process() {
                       className={cx(
                         "absolute -translate-x-1/2 -translate-y-1/2 rounded-full border",
                         activeDot
-                          ? "border-white/35 bg-white/30"
+                          ? "border-violet-300 bg-violet-200"
                           : pastDot
-                          ? "border-white/22 bg-white/18"
-                          : "border-white/15 bg-white/10"
+                          ? "border-violet-300 bg-violet-100"
+                          : "border-violet-200 bg-violet-100"
                       )}
                       style={{
                         left: x,
@@ -233,7 +233,7 @@ export default function Process() {
               {/* center: STEP + TITLE only (no subtext) */}
               <div className="absolute inset-0 flex items-center justify-center text-center px-6">
                 <div className="relative w-full max-w-[320px]">
-                  <p className="text-[11px] font-semibold tracking-[0.22em] text-white/55">
+                  <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-500">
                     STEP {String(Math.min(phase + 1, phases)).padStart(2, "0")} /{" "}
                     {String(phases).padStart(2, "0")}
                   </p>
@@ -250,7 +250,7 @@ export default function Process() {
                           )}
                           style={{ transitionTimingFunction: "cubic-bezier(.22,1,.36,1)" }}
                         >
-                          <h3 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white">
+                          <h3 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-slate-900">
                             {s.t}
                           </h3>
                         </div>
@@ -271,7 +271,7 @@ export default function Process() {
                     style={{ transitionTimingFunction: "cubic-bezier(.22,1,.36,1)" }}
                     aria-hidden={!isComplete}
                   >
-                    <div className="rounded-full border border-white/18 bg-black/45 backdrop-blur-md w-16 h-16 flex items-center justify-center">
+                    <div className="rounded-full border border-violet-300 bg-white/70 backdrop-blur-md w-16 h-16 flex items-center justify-center">
                       <svg width="26" height="18" viewBox="0 0 22 16" fill="none">
                         <path
                           d="M2 9.2L8.2 14L20 2"
@@ -291,7 +291,7 @@ export default function Process() {
                         key={i}
                         className={cx(
                           "inline-block rounded-full transition-all duration-900",
-                          i === phase ? "bg-white/80" : "bg-white/20"
+                          i === phase ? "bg-white/70" : "bg-violet-200"
                         )}
                         style={{ width: i === phase ? 18 : 6, height: 6 }}
                       />
@@ -312,15 +312,15 @@ export default function Process() {
 
                 return (
                   <div key={s.t} className="relative pl-6">
-                    <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
+                    <div className="absolute left-0 top-0 bottom-0 w-px bg-violet-100" />
                     <div
                       className={cx(
                         "absolute left-0 top-2 -translate-x-1/2 rounded-full border",
                         is
-                          ? "border-white/35 bg-white/30"
+                          ? "border-violet-300 bg-violet-200"
                           : isPast
-                          ? "border-white/22 bg-white/18"
-                          : "border-white/15 bg-white/10"
+                          ? "border-violet-300 bg-violet-100"
+                          : "border-violet-200 bg-violet-100"
                       )}
                       style={{
                         width: is ? 12 : 8,
@@ -331,7 +331,7 @@ export default function Process() {
                       }}
                     />
 
-                    <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">
+                    <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">
                       {String(i + 1).padStart(2, "0")}
                     </p>
 
@@ -339,7 +339,7 @@ export default function Process() {
                       <h4
                         className={cx(
                           "mt-1 text-lg sm:text-xl font-semibold tracking-[-0.02em] transition-colors duration-900",
-                          is ? "text-white" : "text-white/70"
+                          is ? "text-slate-900" : "text-slate-600"
                         )}
                       >
                         {s.t}
@@ -347,7 +347,7 @@ export default function Process() {
                       <span
                         className={cx(
                           "text-[11px] font-semibold tracking-[0.22em] transition-colors duration-900",
-                          is ? "text-white/60" : "text-white/30"
+                          is ? "text-slate-500" : "text-slate-300"
                         )}
                       >
                         {is ? "NOW" : "—"}
@@ -357,7 +357,7 @@ export default function Process() {
                     <p
                       className={cx(
                         "mt-2 text-sm leading-relaxed transition-colors duration-900",
-                        is ? "text-white/70" : "text-white/50"
+                        is ? "text-slate-600" : "text-slate-500"
                       )}
                     >
                       {s.d}
@@ -368,11 +368,11 @@ export default function Process() {
 
               {/* Completion line (right side only; no “Done” in circle) */}
               <div className="relative pl-6">
-                <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
+                <div className="absolute left-0 top-0 bottom-0 w-px bg-violet-100" />
                 <div
                   className={cx(
                     "absolute left-0 top-2 -translate-x-1/2 rounded-full border",
-                    isComplete ? "border-white/35 bg-white/30" : "border-white/15 bg-white/10"
+                    isComplete ? "border-violet-300 bg-violet-200" : "border-violet-200 bg-violet-100"
                   )}
                   style={{
                     width: isComplete ? 12 : 8,
@@ -382,14 +382,14 @@ export default function Process() {
                       "width 900ms cubic-bezier(.22,1,.36,1), height 900ms cubic-bezier(.22,1,.36,1), opacity 900ms cubic-bezier(.22,1,.36,1)",
                   }}
                 />
-                <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">
+                <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">
                   {String(phases).padStart(2, "0")}
                 </p>
                 <div className="flex items-baseline justify-between gap-6">
                   <h4
                     className={cx(
                       "mt-1 text-lg sm:text-xl font-semibold tracking-[-0.02em] transition-colors duration-900",
-                      isComplete ? "text-white" : "text-white/70"
+                      isComplete ? "text-slate-900" : "text-slate-600"
                     )}
                   >
                     Completed
@@ -397,13 +397,13 @@ export default function Process() {
                   <span
                     className={cx(
                       "text-[11px] font-semibold tracking-[0.22em] transition-colors duration-900",
-                      isComplete ? "text-white/60" : "text-white/30"
+                      isComplete ? "text-slate-500" : "text-slate-300"
                     )}
                   >
                     {isComplete ? "NOW" : "—"}
                   </span>
                 </div>
-                <p className={cx("mt-2 text-sm leading-relaxed transition-colors duration-900", isComplete ? "text-white/70" : "text-white/50")}>
+                <p className={cx("mt-2 text-sm leading-relaxed transition-colors duration-900", isComplete ? "text-slate-600" : "text-slate-500")}>
                   Confirmed and restarting.
                 </p>
               </div>
@@ -411,7 +411,7 @@ export default function Process() {
 
             {/* Mobile: morph active text only (and completion) */}
             <div className="lg:hidden">
-              <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">ACTIVE</p>
+              <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">ACTIVE</p>
 
               <div className="mt-2 relative min-h-[110px]">
                 {steps.map((s, i) => {
@@ -425,10 +425,10 @@ export default function Process() {
                       )}
                       style={{ transitionTimingFunction: "cubic-bezier(.22,1,.36,1)" }}
                     >
-                      <h4 className="text-xl font-semibold tracking-[-0.02em] text-white">
+                      <h4 className="text-xl font-semibold tracking-[-0.02em] text-slate-900">
                         {String(i + 1).padStart(2, "0")}. {s.t}
                       </h4>
-                      <p className="mt-2 text-sm text-white/70 leading-relaxed">{s.d}</p>
+                      <p className="mt-2 text-sm text-slate-600 leading-relaxed">{s.d}</p>
                     </div>
                   );
                 })}
@@ -440,21 +440,21 @@ export default function Process() {
                   )}
                   style={{ transitionTimingFunction: "cubic-bezier(.22,1,.36,1)" }}
                 >
-                  <h4 className="text-xl font-semibold tracking-[-0.02em] text-white">
+                  <h4 className="text-xl font-semibold tracking-[-0.02em] text-slate-900">
                     {String(phases).padStart(2, "0")}. Completed
                   </h4>
-                  <p className="mt-2 text-sm text-white/70 leading-relaxed">
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">
                     Confirmed and restarting.
                   </p>
                 </div>
               </div>
 
-              <div className="mt-5 h-px w-full bg-white/10" />
+              <div className="mt-5 h-px w-full bg-violet-100" />
               <div className="mt-4 flex items-center gap-3">
-                <span className="text-[11px] font-semibold tracking-[0.22em] text-white/45">
+                <span className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">
                   PROGRESS
                 </span>
-                <div className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
+                <div className="flex-1 h-1.5 rounded-full bg-violet-100 overflow-hidden">
                   <div
                     className="h-full bg-white/70 rounded-full"
                     style={{
@@ -466,8 +466,8 @@ export default function Process() {
               </div>
             </div>
 
-            <p className="pt-2 text-sm text-white/55">
-              Tip: add background images in <span className="text-white/70">/public/process/01.jpg</span> etc.
+            <p className="pt-2 text-sm text-slate-500">
+              Tip: add background images in <span className="text-slate-600">/public/process/01.jpg</span> etc.
             </p>
           </div>
         </div>

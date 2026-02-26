@@ -1,6 +1,10 @@
-"use client";
-import ContactHub from "@/components/contact/ContactHub";
+import { Suspense } from "react";
+import ContactClient from "./contact-client";
 
-export default function Page() {
-  return <ContactHub />;
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="min-h-[50vh]" />}>
+      <ContactClient />
+    </Suspense>
+  );
 }

@@ -10,7 +10,7 @@ export default function SectionShell({
   innerClassName,
   rounded = true,
   overlap = true,
-  bg = "bg-black/25",
+  bg = "bg-white/70",
 }: {
   children: React.ReactNode;
   className?: string;
@@ -22,7 +22,7 @@ export default function SectionShell({
   return (
     <section
       className={cx(
-        "relative z-10 overflow-hidden border-t border-white/10",
+        "relative z-10 overflow-hidden border-t border-violet-200",
         overlap && "-mt-10",
         rounded && "rounded-t-[28px]",
         bg,
@@ -31,9 +31,9 @@ export default function SectionShell({
     >
       {/* global background language */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_30%,rgba(79,215,255,0.14),transparent_58%),radial-gradient(circle_at_78%_72%,rgba(46,229,157,0.12),transparent_62%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_30%,rgba(109,94,252,0.14),transparent_58%),radial-gradient(circle_at_78%_72%,rgba(59,130,246,0.12),transparent_62%)]" />
         <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:220px_220px]" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,transparent_35%,rgba(0,0,0,0.78)_92%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,transparent_35%,rgba(255,255,255,0.56)_92%)]" />
         <div
           className="absolute inset-0 opacity-[0.07] mix-blend-overlay pointer-events-none"
           style={{
@@ -49,7 +49,7 @@ export default function SectionShell({
       {rounded && (
         <div className="pointer-events-none absolute inset-x-0 bottom-0">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="h-10 rounded-t-[28px] border border-white/10 bg-black/35 backdrop-blur-md" />
+            <div className="h-10 rounded-t-[28px] border border-violet-200 bg-white/70 backdrop-blur-md" />
           </div>
         </div>
       )}
