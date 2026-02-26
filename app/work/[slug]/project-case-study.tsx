@@ -8,12 +8,13 @@ import { ExternalLink, X } from "lucide-react";
 import Container from "@/components/ui/Container";
 import type { Project } from "@/data/projects";
 import { CASE_STUDIES } from "@/data/caseStudies";
+import { TEAM_MEMBERS } from "@/data/team";
 
 function categoryAccent(cat: Project["category"]) {
-  if (cat === "Web") return "rgba(79,215,255,0.22)";
-  if (cat === "Graphics") return "rgba(46,229,157,0.20)";
-  if (cat === "Branding") return "rgba(255,180,140,0.18)";
-  return "rgba(140,160,255,0.18)";
+  if (cat === "Web") return "rgba(109,94,252,0.22)";
+  if (cat === "Graphics") return "rgba(59,130,246,0.20)";
+  if (cat === "Branding") return "rgba(124,58,237,0.18)";
+  return "rgba(99,102,241,0.18)";
 }
 
 function tintFromSlug(slug: string) {
@@ -45,9 +46,10 @@ function buildCandidates(pathNoExt: string) {
 
 function useFallbackImageSrc(candidates: string[]) {
   const [idx, setIdx] = useState(0);
-  const src = candidates[Math.min(idx, candidates.length - 1)];
+  const safe = candidates.length ? candidates : ["/next.svg"];
+  const src = safe[Math.min(idx, safe.length - 1)];
   function onError() {
-    setIdx((v) => Math.min(v + 1, candidates.length - 1));
+    setIdx((v) => Math.min(v + 1, (candidates.length ? candidates : ["/next.svg"]).length - 1));
   }
   return { src, onError };
 }
@@ -111,7 +113,7 @@ function useDiscoveredSet(slug: string, kind: "brand" | "design", max = 24) {
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold tracking-[0.14em] text-white/70">
+    <span className="inline-flex items-center rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-[11px] font-semibold tracking-[0.14em] text-slate-600">
       {children}
     </span>
   );
@@ -120,8 +122,8 @@ function Tag({ children }: { children: React.ReactNode }) {
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-6">
-      <span className="text-white/55">{label}</span>
-      <span className="font-semibold text-white/80 text-right">{value}</span>
+      <span className="text-slate-500">{label}</span>
+      <span className="font-semibold text-slate-800 text-right">{value}</span>
     </div>
   );
 }
@@ -137,6 +139,11 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
   const solved = cs?.solved || "Add how you solved it for this project.";
   const did = cs?.did || "Add what it did / outcome for this project.";
   const delivered = cs?.delivered?.length ? cs.delivered : ["Add deliverables."];
+
+  const leadMember = TEAM_MEMBERS.find((m) => m.slug === project.leadMemberSlug);
+  const acknowledgement = leadMember
+    ? `Project lead: ${leadMember.name}. Built as a full team collaboration.`
+    : "Built as a team collaboration.";
 
   // Background thumb
   const thumb = useFallbackImageSrc([
@@ -189,12 +196,12 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
 
   return (
     <section
-      className="relative min-h-screen overflow-hidden border-t border-white/10 bg-black/25"
+      className="relative min-h-screen overflow-hidden border-t border-violet-200 bg-white/70"
       style={{ ["--accent" as any]: accent } as any}
     >
       {/* BG layers */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-black/18" />
+        <div className="absolute inset-0 bg-white/70" />
         <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:220px_220px]" />
 
         <div className="absolute inset-0">
@@ -206,7 +213,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
             priority
             sizes="100vw"
             className="object-cover scale-110"
-            style={{ opacity: 0.22, filter: "blur(28px) saturate(1.05) contrast(1.06)" }}
+            style={{ opacity: 0.12, filter: "blur(14px) saturate(1.03) contrast(1.03)" }}
           />
         </div>
 
@@ -219,7 +226,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
             priority
             sizes="100vw"
             className="object-cover scale-[1.03]"
-            style={{ opacity: 0.12, filter: "blur(2px) saturate(1.05)" }}
+            style={{ opacity: 0.28, filter: "blur(0.5px) saturate(1.02)" }}
           />
         </div>
 
@@ -234,8 +241,8 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           }}
         />
 
-        <div className="absolute inset-0 bg-black/36" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_45%_25%,rgba(0,0,0,0.10),rgba(0,0,0,0.78)_62%,rgba(0,0,0,0.94)_100%)]" />
+        <div className="absolute inset-0 bg-white/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_45%_25%,rgba(148,163,184,0.1),rgba(255,255,255,0.56)_62%,rgba(255,255,255,0.70)_100%)]" />
       </div>
 
       <Container className="relative z-10">
@@ -248,17 +255,17 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
         >
           <Link
             href="/work"
-            className="text-[11px] font-semibold tracking-[0.22em] text-white/60 hover:text-white/80 transition"
+            className="text-[11px] font-semibold tracking-[0.22em] text-slate-500 hover:text-slate-800 transition"
           >
             ← BACK TO WORK
           </Link>
 
           <div className="flex items-center gap-2">
             <span
-              className="h-2.5 w-2.5 rounded-full border border-white/20"
+              className="h-2.5 w-2.5 rounded-full border border-violet-300"
               style={{ background: "var(--accent)", boxShadow: `0 0 26px var(--accent)` }}
             />
-            <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">CASE STUDY</p>
+            <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">CASE STUDY</p>
           </div>
         </motion.div>
 
@@ -270,16 +277,20 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
             transition={{ duration: 0.7, ease }}
             className="max-w-3xl"
           >
-            <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">
+            <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">
               {project.category.toUpperCase()} • {project.year}
             </p>
 
-            <h1 className="mt-4 text-balance text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-[-0.04em] text-white">
+            <h1 className="mt-4 text-balance text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-[-0.04em] text-slate-900">
               {project.title}
             </h1>
 
-            <p className="mt-4 text-sm sm:text-base text-white/70 leading-relaxed max-w-2xl">
+            <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
               {project.blurb}
+            </p>
+
+            <p className="mt-4 inline-flex rounded-full border border-violet-200 bg-white/85 px-4 py-2 text-xs font-semibold tracking-[0.06em] text-slate-700">
+              {acknowledgement}
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2">
@@ -287,11 +298,27 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 <Tag key={t}>{t}</Tag>
               ))}
             </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href={`/contact?subject=${encodeURIComponent(project.title)}&message=${encodeURIComponent(`Hi, I want a project like ${project.title}.`)}`}
+                className="inline-flex rounded-full bg-[var(--mint)] px-6 py-3 text-sm font-semibold text-white"
+              >
+                Start similar project
+              </Link>
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                className="inline-flex rounded-full border border-violet-200 bg-white px-6 py-3 text-sm font-semibold text-slate-800"
+              >
+                Open preview
+              </button>
+            </div>
           </motion.div>
 
           {/* mobile hero image (thumb) */}
           <div className="mt-10 lg:hidden">
-            <div className="relative aspect-[16/10] w-full border-y border-white/10">
+            <div className="relative aspect-[16/10] w-full border-y border-violet-200">
               <Image
                 src={thumb.src}
                 onError={thumb.onError}
@@ -301,34 +328,34 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 className="object-cover"
                 priority
               />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-violet-300/35 to-transparent" />
             </div>
           </div>
 
           {/* preview trigger (mobile) */}
-          <div className="mt-10 lg:hidden border-y border-white/10">
+          <div className="mt-10 lg:hidden border-y border-violet-200">
             <button type="button" onClick={() => setOpen(true)} className="w-full text-left py-5">
               <div className="flex items-center justify-between">
-                <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">PREVIEW</p>
-                <span className="text-[11px] font-semibold tracking-[0.22em] text-white/60">OPEN →</span>
+                <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">PREVIEW</p>
+                <span className="text-[11px] font-semibold tracking-[0.22em] text-slate-500">OPEN →</span>
               </div>
 
               <div className="mt-4 relative aspect-[16/10] w-full">
                 <Image src={previewSrc} alt={`${project.title} preview`} fill sizes="100vw" className="object-cover" />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/70 to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-violet-300/35 to-transparent" />
               </div>
 
               {/* show “loading” hint for sets */}
               {isSet && setUrls === null && (
-                <p className="mt-4 text-sm text-white/55">Loading set…</p>
+                <p className="mt-4 text-sm text-slate-500">Loading set…</p>
               )}
               {isSet && setUrls && setUrls.length > 1 && (
-                <p className="mt-4 text-sm text-white/55">{setUrls.length} images in this set</p>
+                <p className="mt-4 text-sm text-slate-500">{setUrls.length} images in this set</p>
               )}
             </button>
           </div>
 
-          <div className="mt-12 h-px w-full bg-white/10" />
+          <div className="mt-12 h-px w-full bg-violet-100" />
         </div>
 
         {/* layout */}
@@ -348,13 +375,13 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 transition={{ duration: 0.6, ease }}
                 className="pt-2"
               >
-                {idx !== 0 && <div className="mb-12 h-px w-full bg-white/10" />}
+                {idx !== 0 && <div className="mb-12 h-px w-full bg-violet-100" />}
 
-                <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">{s.k}</p>
-                <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-[-0.04em] text-white">
+                <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">{s.k}</p>
+                <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-[-0.04em] text-slate-900">
                   {s.title}
                 </h2>
-                <p className="mt-4 text-sm sm:text-base text-white/70 leading-relaxed max-w-2xl">
+                <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
                   {s.body}
                 </p>
               </motion.div>
@@ -367,22 +394,22 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
               {/* this makes DELIVERED occupy the remaining height */}
               <div className="h-[calc(100vh-140px)] flex flex-col">
                 {/* preview */}
-                <div className="border-y border-white/10">
+                <div className="border-y border-violet-200">
                   <button type="button" onClick={() => setOpen(true)} className="group w-full text-left">
                     <div className="flex items-center justify-between py-4">
-                      <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">PREVIEW</p>
-                      <span className="text-[11px] font-semibold tracking-[0.22em] text-white/60 group-hover:text-white/85 transition">
+                      <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">PREVIEW</p>
+                      <span className="text-[11px] font-semibold tracking-[0.22em] text-slate-500 group-hover:text-slate-900 transition">
                         OPEN →
                       </span>
                     </div>
 
                     <div className="relative aspect-[16/10] w-full">
                       <Image src={previewSrc} alt={`${project.title} preview`} fill sizes="38vw" className="object-cover" />
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/70 to-transparent" />
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-violet-300/35 to-transparent" />
                     </div>
 
                     <div className="py-4">
-                      <p className="text-sm text-white/65">
+                      <p className="text-sm text-slate-600">
                         {isSet ? "Opens as a clean gallery (no carousel)." : "Opens as a scrollable preview."}
                       </p>
                     </div>
@@ -392,41 +419,41 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 {/* details */}
                 <div className="pt-10">
                   <div className="flex items-center justify-between">
-                    <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">DETAILS</p>
+                    <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">DETAILS</p>
                     <span
-                      className="inline-block h-2.5 w-2.5 rounded-full border border-white/20"
+                      className="inline-block h-2.5 w-2.5 rounded-full border border-violet-300"
                       style={{ background: "var(--accent)", boxShadow: `0 0 18px var(--accent)` }}
                     />
                   </div>
 
-                  <div className="mt-5 h-px w-full bg-white/10" />
-                  <div className="mt-5 space-y-4 text-sm text-white/70">
+                  <div className="mt-5 h-px w-full bg-violet-100" />
+                  <div className="mt-5 space-y-4 text-sm text-slate-600">
                     <Row label="Category" value={project.category} />
-                    <div className="h-px w-full bg-white/10" />
+                    <div className="h-px w-full bg-violet-100" />
                     <Row label="Year" value={project.year} />
-                    <div className="h-px w-full bg-white/10" />
+                    <div className="h-px w-full bg-violet-100" />
                     <Row label="Primary focus" value={project.tags?.[0] || "—"} />
                   </div>
                 </div>
 
                 {/* delivered grows to fill */}
                 <div className="pt-10 flex-1 flex flex-col">
-                  <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">DELIVERED</p>
-                  <div className="mt-5 h-px w-full bg-white/10" />
+                  <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">DELIVERED</p>
+                  <div className="mt-5 h-px w-full bg-violet-100" />
 
                   <div className="mt-5 grid gap-2">
                     {delivered.map((x) => (
                       <div key={x} className="flex gap-3">
                         <div className="mt-[7px] h-[3px] w-[3px] rounded-full bg-white/35" />
-                        <p className="text-sm text-white/70 leading-relaxed">{x}</p>
+                        <p className="text-sm text-slate-600 leading-relaxed">{x}</p>
                       </div>
                     ))}
                   </div>
 
                   {/* soft filler so the section “uses” the column */}
                   <div className="mt-auto pt-10">
-                    <div className="h-px w-full bg-white/10" />
-                    <p className="mt-4 text-sm text-white/55">
+                    <div className="h-px w-full bg-violet-100" />
+                    <p className="mt-4 text-sm text-slate-500">
                       Clean delivery. Minimal. Built for conversion.
                     </p>
                   </div>
@@ -434,17 +461,17 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
 
                 {/* ctas */}
                 <div className="pt-8">
-                  <div className="h-px w-full bg-white/10" />
+                  <div className="h-px w-full bg-violet-100" />
                   <div className="mt-6 grid gap-3">
                     <Link
-                      href="/contact"
-                      className="w-full inline-flex items-center justify-between rounded-full border border-white/12 bg-white/5 px-6 py-3 text-sm font-semibold text-white/85 hover:bg-white/10 transition"
+                      href={`/contact?subject=${encodeURIComponent(project.title)}&message=${encodeURIComponent(`Hi, I want a project like ${project.title}.`)}`}
+                      className="w-full inline-flex items-center justify-between rounded-full border border-violet-200 bg-violet-50 px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-violet-100 transition"
                     >
                       Request similar <span>→</span>
                     </Link>
                     <Link
                       href="/work"
-                      className="w-full inline-flex items-center justify-between rounded-full border border-white/12 bg-transparent px-6 py-3 text-sm font-semibold text-white/75 hover:bg-white/5 transition"
+                      className="w-full inline-flex items-center justify-between rounded-full border border-violet-200 bg-transparent px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-violet-50 transition"
                     >
                       Browse work <span>→</span>
                     </Link>
@@ -456,28 +483,28 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
 
           {/* mobile delivered + ctas */}
           <div className="lg:hidden">
-            <div className="h-px w-full bg-white/10" />
+            <div className="h-px w-full bg-violet-100" />
             <div className="pt-10">
-              <p className="text-[11px] font-semibold tracking-[0.22em] text-white/45">DELIVERED</p>
+              <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-400">DELIVERED</p>
               <div className="mt-5 grid gap-2">
                 {delivered.map((x) => (
                   <div key={x} className="flex gap-3">
                     <div className="mt-[7px] h-[3px] w-[3px] rounded-full bg-white/35" />
-                    <p className="text-sm text-white/70 leading-relaxed">{x}</p>
+                    <p className="text-sm text-slate-600 leading-relaxed">{x}</p>
                   </div>
                 ))}
               </div>
 
               <div className="mt-10 grid gap-3">
                 <Link
-                  href="/contact"
-                  className="w-full inline-flex items-center justify-between rounded-full border border-white/12 bg-white/5 px-6 py-3 text-sm font-semibold text-white/85 hover:bg-white/10 transition"
+                  href={`/contact?subject=${encodeURIComponent(project.title)}&message=${encodeURIComponent(`Hi, I want a project like ${project.title}.`)}`}
+                  className="w-full inline-flex items-center justify-between rounded-full border border-violet-200 bg-violet-50 px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-violet-100 transition"
                 >
                   Request similar <span>→</span>
                 </Link>
                 <Link
                   href="/work"
-                  className="w-full inline-flex items-center justify-between rounded-full border border-white/12 bg-transparent px-6 py-3 text-sm font-semibold text-white/75 hover:bg-white/5 transition"
+                  className="w-full inline-flex items-center justify-between rounded-full border border-violet-200 bg-transparent px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-violet-50 transition"
                 >
                   Browse work <span>→</span>
                 </Link>
@@ -501,7 +528,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           >
             <button
               type="button"
-              className="absolute inset-0 bg-black/70"
+              className="absolute inset-0 bg-white/80"
               onClick={() => setOpen(false)}
               aria-label="Close preview"
             />
@@ -512,7 +539,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
                 exit={reduce ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.99 }}
                 transition={{ duration: 0.38, ease }}
-                className="relative w-full max-w-6xl overflow-hidden rounded-[28px] border border-white/12 bg-black/40 backdrop-blur-xl"
+                className="relative w-full max-w-6xl overflow-hidden rounded-[28px] border border-violet-200 bg-white/80 backdrop-blur-xl"
                 style={{ ["--accent" as any]: accent } as any}
               >
                 <div
@@ -525,8 +552,8 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 {/* header */}
                 <div className="relative z-10 flex items-center justify-between gap-4 px-5 sm:px-6 py-4">
                   <div className="min-w-0">
-                    <p className="text-[11px] font-semibold tracking-[0.22em] text-white/55">PREVIEW</p>
-                    <p className="mt-1 text-sm font-semibold text-white/85 truncate">{project.title}</p>
+                    <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-500">PREVIEW</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-900 truncate">{project.title}</p>
                   </div>
 
                   <div className="flex items-center gap-2">
@@ -535,7 +562,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                       href={previewSrc}
                       target="_blank"
                       rel="noreferrer"
-                      className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/5 text-white/80 hover:bg-white/10 transition"
+                      className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-violet-50 text-slate-800 hover:bg-violet-100 transition"
                       aria-label="Open in new tab"
                       title="Open in new tab"
                     >
@@ -544,7 +571,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                     <button
                       type="button"
                       onClick={() => setOpen(false)}
-                      className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/5 text-white/80 hover:bg-white/10 transition"
+                      className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-violet-50 text-slate-800 hover:bg-violet-100 transition"
                       aria-label="Close preview"
                       title="Close"
                     >
@@ -556,21 +583,21 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                       href={previewSrc}
                       target="_blank"
                       rel="noreferrer"
-                      className="hidden lg:inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] text-white/80 hover:bg-white/10 transition"
+                      className="hidden lg:inline-flex items-center justify-center rounded-full border border-violet-200 bg-violet-50 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] text-slate-800 hover:bg-violet-100 transition"
                     >
                       OPEN TAB →
                     </a>
                     <button
                       type="button"
                       onClick={() => setOpen(false)}
-                      className="hidden lg:inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] text-white/80 hover:bg-white/10 transition"
+                      className="hidden lg:inline-flex items-center justify-center rounded-full border border-violet-200 bg-violet-50 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] text-slate-800 hover:bg-violet-100 transition"
                     >
                       CLOSE
                     </button>
                   </div>
                 </div>
 
-                <div className="h-px w-full bg-white/10" />
+                <div className="h-px w-full bg-violet-100" />
 
                 <div className="relative max-h-[78vh] overflow-auto">
                   {/* Branding/Graphics: stack all found images (scroll like Web/Systems) */}
@@ -578,18 +605,18 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                     <div className="p-3 sm:p-5">
                       {setUrls === null ? (
                         <div className="py-20 text-center">
-                          <p className="text-sm text-white/60">Loading images…</p>
+                          <p className="text-sm text-slate-500">Loading images…</p>
                         </div>
                       ) : setUrls.length === 0 ? (
                         <div className="py-20 text-center">
-                          <p className="text-sm text-white/60">
+                          <p className="text-sm text-slate-500">
                             No set images found. Add files like {project.category === "Branding" ? "brand-01.png" : "design-01.png"}.
                           </p>
                         </div>
                       ) : (
                         <div className="grid gap-6">
                           {setUrls.map((u, i) => (
-                            <div key={u} className="border border-white/10 bg-white/5 rounded-[28px] overflow-hidden">
+                            <div key={u} className="border border-violet-200 bg-violet-50 rounded-[28px] overflow-hidden">
                               <div className="relative w-full">
                                 <Image
                                   src={u}
@@ -600,12 +627,12 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                                   priority={i === 0}
                                 />
                               </div>
-                              <div className="h-px w-full bg-white/10" />
+                              <div className="h-px w-full bg-violet-100" />
                               <div className="px-5 py-4 flex items-center justify-between">
-                                <p className="text-[11px] font-semibold tracking-[0.22em] text-white/55">
+                                <p className="text-[11px] font-semibold tracking-[0.22em] text-slate-500">
                                   {project.category.toUpperCase()} • {String(i + 1).padStart(2, "0")}
                                 </p>
-                                <span className="text-[11px] font-semibold tracking-[0.22em] text-white/50">
+                                <span className="text-[11px] font-semibold tracking-[0.22em] text-slate-500">
                                   {i + 1}/{setUrls.length}
                                 </span>
                               </div>
@@ -627,7 +654,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                     />
                   )}
 
-                  <div className="pointer-events-none sticky bottom-0 h-16 w-full bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="pointer-events-none sticky bottom-0 h-16 w-full bg-gradient-to-t from-violet-300/30 to-transparent" />
                 </div>
 
                 <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-white/10" />

@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("Missing RESEND_API_KEY environment variable.");
+  }
+
+  return new Resend(apiKey);
+}
 
 function safe(v: unknown) {
   return String(v ?? "").trim();
@@ -9,19 +17,26 @@ function safe(v: unknown) {
 
 function wantPhrase(service: string) {
   const s = service.toLowerCase();
-
-  // Make it sound human
-  if (s.includes("website") || s.includes("web design") || s.includes("web")) return "a website";
-  if (s.includes("graphic") || s.includes("flyer") || s.includes("poster") || s.includes("design"))
-    return "graphics";
-  if (s.includes("system") || s.includes("dashboard") || s.includes("portal"))
-    return "a smart system";
-
+  if (s.includes("website") || s.includes("web")) return "a website";
+  if (s.includes("graphic") || s.includes("flyer") || s.includes("design")) return "graphics";
+  if (s.includes("system") || s.includes("dashboard") || s.includes("portal")) return "a smart system";
   return "a project";
+}
+
+function leadRecipients() {
+  const envList = (process.env.LEADS_TO_EMAIL || "")
+    .split(",")
+    .map((x) => x.trim())
+    .filter(Boolean);
+
+  const defaults = ["a83010659@gmail.com", "uhasihrproject@gmail.com"];
+  const list = envList.length ? envList : defaults;
+  return Array.from(new Set(list));
 }
 
 export async function POST(req: Request) {
   try {
+    const resend = getResendClient();
     const body = await req.json();
 
     const name = safe(body.name);
@@ -31,24 +46,13 @@ export async function POST(req: Request) {
     const message = safe(body.message);
 
     if (!email) {
-      return NextResponse.json(
-        { ok: false, error: "Email is required." },
-        { status: 400 }
-      );
+      return NextResponse.json({ ok: false, error: "Email is required." }, { status: 400 });
     }
 
-    const wants = wantPhrase(service);
-
-    // ✅ clean subject (if service already includes package name, it’ll read nicely)
     const subject = `New inquiry — ${service}`;
-
-    // ✅ the exact first line you wanted
-    const firstLine = `${email} wants ${wants} (${service}).`;
-
-    // If user didn't type a message, auto-generate a professional one
+    const firstLine = `${email} wants ${wantPhrase(service)} (${service}).`;
     const finalMessage =
-      message ||
-      `Hi, I’m interested in ${service}. Please share the next steps and what you need from me.`;
+      message || `Hi, I’m interested in ${service}. Please share the next steps and what you need from me.`;
 
     const text = [
       firstLine,
@@ -66,20 +70,16 @@ export async function POST(req: Request) {
     ].join("\n");
 
     await resend.emails.send({
-      from:
-        process.env.LEADS_FROM_EMAIL ||
-        "Portfolio Leads <onboarding@resend.dev>",
-      to: [process.env.LEADS_TO_EMAIL!],
+      from: process.env.LEADS_FROM_EMAIL || "Portfolio Leads <onboarding@resend.dev>",
+      to: leadRecipients(),
       replyTo: email,
       subject,
       text,
     });
 
     return NextResponse.json({ ok: true });
-  } catch (e: any) {
-    return NextResponse.json(
-      { ok: false, error: e?.message || "Failed to send email." },
-      { status: 500 }
-    );
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to send email.";
+    return NextResponse.json({ ok: false, error: message }, { status: 500 });
   }
 }

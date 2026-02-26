@@ -50,7 +50,7 @@ function CountUp({
   }, [inView, value, reduce]);
 
   return (
-    <div ref={ref} className="text-5xl sm:text-6xl font-semibold tracking-[-0.04em] text-white">
+    <div ref={ref} className="text-5xl sm:text-6xl font-semibold tracking-[-0.04em] text-slate-900">
       {prefix}
       {count}
       {suffix}
@@ -62,9 +62,9 @@ export default function Proof() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden border-y border-white/10">
+    <section className="relative overflow-hidden border-y border-violet-200">
       {/* base tint */}
-      <div className="absolute inset-0 bg-black/25" />
+      <div className="absolute inset-0 bg-white/70" />
 
       {/* subtle grid */}
       <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:180px_180px]" />
@@ -89,7 +89,7 @@ export default function Proof() {
             className="pointer-events-none absolute -left-44 -top-44 h-[520px] w-[520px] blur-3xl opacity-55"
             style={{
               background:
-                "radial-gradient(circle at 40% 40%, rgba(79,215,255,0.14), transparent 62%)",
+                "radial-gradient(circle at 40% 40%, rgba(109,94,252,0.14), transparent 62%)",
             }}
             animate={{ x: [0, 70, 0], y: [0, 28, 0] }}
             transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
@@ -98,7 +98,7 @@ export default function Proof() {
             className="pointer-events-none absolute -right-56 -bottom-56 h-[620px] w-[620px] blur-3xl opacity-45"
             style={{
               background:
-                "radial-gradient(circle at 45% 45%, rgba(46,229,157,0.10), transparent 62%)",
+                "radial-gradient(circle at 45% 45%, rgba(59,130,246,0.10), transparent 62%)",
             }}
             animate={{ x: [0, -80, 0], y: [0, -32, 0] }}
             transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
@@ -107,7 +107,7 @@ export default function Proof() {
       )}
 
       {/* vignette to blend */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,transparent_35%,rgba(0,0,0,0.58)_92%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,transparent_35%,rgba(255,255,255,0.42)_92%)]" />
 
       <Container className="relative z-10 py-16 sm:py-20">
         <div className="grid gap-10 sm:grid-cols-3 text-center sm:text-left">
@@ -131,16 +131,16 @@ export default function Proof() {
 
               <CountUp value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
 
-              <p className="mt-4 text-sm font-semibold tracking-[0.18em] text-white/70 uppercase">
+              <p className="mt-4 text-sm font-semibold tracking-[0.18em] text-slate-600 uppercase">
                 {stat.label}
               </p>
 
-              <p className="mt-2 text-sm text-white/60 max-w-xs mx-auto sm:mx-0">
+              <p className="mt-2 text-sm text-slate-500 max-w-xs mx-auto sm:mx-0">
                 {stat.note}
               </p>
 
               {/* micro underline */}
-              <div className="mt-7 h-px w-full bg-white/10" />
+              <div className="mt-7 h-px w-full bg-violet-100" />
             </motion.div>
           ))}
         </div>
