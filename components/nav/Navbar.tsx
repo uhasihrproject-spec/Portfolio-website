@@ -2,11 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Container from "@/components/ui/Container";
-
-const BRAND = "Prem Studio";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -21,17 +19,12 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-function NavLink({ href, label, pathname, onClick }: { href: string; label: string; pathname: string; onClick?: () => void }) {
+function NavItem({ href, label, pathname, onClick }: { href: string; label: string; pathname: string; onClick?: () => void }) {
   const active = isActive(pathname, href);
-
   return (
-    <Link href={href} onClick={onClick} className="relative px-1 py-1 text-sm font-medium text-slate-700 hover:text-slate-900 transition">
+    <Link href={href} onClick={onClick} className="group relative text-sm font-medium text-slate-700 hover:text-slate-900 transition">
       {label}
-      <span
-        className={`absolute left-0 -bottom-1 h-[2px] rounded-full bg-indigo-600 transition-all duration-300 ${
-          active ? "w-full" : "w-0 group-hover:w-full"
-        }`}
-      />
+      <span className={`absolute left-0 -bottom-1 h-[2px] rounded-full bg-indigo-600 transition-all ${active ? "w-full" : "w-0 group-hover:w-full"}`} />
     </Link>
   );
 }
@@ -39,53 +32,55 @@ function NavLink({ href, label, pathname, onClick }: { href: string; label: stri
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const saved = typeof window !== "undefined" ? window.localStorage.getItem("theme") : null;
+    const on = saved === "dark";
+    setDark(on);
+    document.documentElement.classList.toggle("dark", on);
+  }, []);
+
+  function toggleTheme() {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    window.localStorage.setItem("theme", next ? "dark" : "light");
+  }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-violet-200/80 bg-white/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-violet-200/80 bg-white/80 backdrop-blur-xl dark:bg-slate-900/80 dark:border-slate-700">
       <Container className="h-16 flex items-center justify-between">
-        <Link href="/" className="font-semibold tracking-[-0.02em] text-slate-900">
-          {BRAND}
-          <span className="text-indigo-600">.</span>
-        </Link>
+        <Link href="/" className="font-semibold tracking-[-0.02em] text-slate-900 dark:text-white">Prem Studio<span className="text-indigo-600">.</span></Link>
 
         <nav className="hidden md:flex items-center gap-7">
-          {navLinks.map((l) => (
-            <div key={l.href} className="group">
-              <NavLink href={l.href} label={l.label} pathname={pathname} />
-            </div>
-          ))}
+          {navLinks.map((l) => <NavItem key={l.href} href={l.href} label={l.label} pathname={pathname} />)}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <Link
-            href="/contact"
-            className="hidden sm:inline-flex items-center rounded-full bg-[var(--mint)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_35px_rgba(79,70,229,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_45px_rgba(79,70,229,0.45)]"
-          >
-            Let&apos;s Talk
-          </Link>
-          <button
-            onClick={() => setOpen((v) => !v)}
-            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-white text-slate-900"
-            aria-label="Toggle menu"
-          >
-            {open ? "✕" : "☰"}
-          </button>
+        <div className="flex items-center gap-2">
+          <button onClick={toggleTheme} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-white text-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:border-slate-600" aria-label="Toggle dark mode">{dark ? "☀" : "☾"}</button>
+          <Link href="/contact" className="hidden sm:inline-flex items-center rounded-full bg-[var(--mint)] px-5 py-2.5 text-sm font-semibold text-white">Let&apos;s Talk</Link>
+          <button onClick={() => setOpen(true)} className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-white text-slate-900" aria-label="Open menu">☰</button>
         </div>
       </Container>
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="md:hidden border-t border-violet-200 bg-white/95"
-          >
-            <Container className="py-4 flex flex-col gap-3">
-              {navLinks.map((l) => (
-                <NavLink key={l.href} href={l.href} label={l.label} pathname={pathname} onClick={() => setOpen(false)} />
-              ))}
-            </Container>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[80] bg-slate-950/70 backdrop-blur-md md:hidden">
+            <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 20, opacity: 0 }} className="h-full w-full bg-white dark:bg-slate-900">
+              <Container className="h-16 flex items-center justify-between border-b border-violet-200 dark:border-slate-700">
+                <p className="font-semibold text-slate-900 dark:text-white">Menu</p>
+                <button onClick={() => setOpen(false)} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 dark:border-slate-700">✕</button>
+              </Container>
+              <Container className="py-10 flex flex-col gap-8">
+                {navLinks.map((l) => (
+                  <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className={`text-3xl font-semibold tracking-[-0.03em] ${isActive(pathname,l.href)?"text-indigo-600":"text-slate-900 dark:text-white"}`}>
+                    {l.label}
+                  </Link>
+                ))}
+                <Link href="/contact" onClick={() => setOpen(false)} className="mt-4 inline-flex w-fit rounded-full bg-[var(--mint)] px-6 py-3 text-sm font-semibold text-white">Start Project</Link>
+              </Container>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

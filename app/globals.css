@@ -78,3 +78,9 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+
+.dark body {
+  background: linear-gradient(180deg,#0b1020 0%,#0f172a 60%,#111827 100%);
+  color: #e5e7eb;
+}

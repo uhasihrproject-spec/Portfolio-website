@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import Container from "@/components/ui/Container";
 import Badge from "@/components/ui/Badge";
-import { SYSTEM_PRODUCTS, getSystemImage } from "@/data/systems";
+import { SYSTEM_PRODUCTS } from "@/data/systems";
 
 export default function BuySystemPage() {
   const hero = SYSTEM_PRODUCTS[0];
@@ -30,7 +29,7 @@ export default function BuySystemPage() {
           <div className="relative overflow-hidden rounded-[30px] border border-violet-200 bg-white/90 p-4 shadow-[0_25px_60px_rgba(79,70,229,0.16)]">
             <div className="absolute -top-20 -right-16 h-56 w-56 rounded-full bg-indigo-200/45 blur-3xl" />
             <div className="relative aspect-[4/3] w-full rounded-2xl border border-violet-200 bg-violet-50">
-              <Image src={getSystemImage(hero)} alt={hero.name} fill className="object-contain p-8" />
+              <div className="grid h-full w-full place-items-center text-4xl font-semibold text-indigo-500">{hero.name.split(" ").map((x) => x[0]).slice(0, 2).join("")}</div>
             </div>
             <div className="relative p-4">
               <p className="text-xs font-semibold tracking-[0.2em] text-slate-500">FLAGSHIP</p>
@@ -45,7 +44,7 @@ export default function BuySystemPage() {
             <motion.div key={sys.slug} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5, delay: i * 0.06 }}>
               <Link href={`/buy-system/${sys.slug}`} className="group block overflow-hidden rounded-[24px] border border-violet-200 bg-white/90 shadow-[0_14px_42px_rgba(79,70,229,0.12)] transition hover:-translate-y-1">
                 <div className="relative aspect-[16/10] border-b border-violet-200 bg-violet-50">
-                  <Image src={getSystemImage(sys)} alt={sys.name} fill className="object-contain p-6" />
+                  <div className="grid h-full w-full place-items-center text-3xl font-semibold text-indigo-500">{sys.name.split(" ").map((x) => x[0]).slice(0, 2).join("")}</div>
                 </div>
                 <div className="p-5">
                   <p className="text-[11px] font-semibold tracking-[0.2em] text-slate-500">{sys.audience.toUpperCase()}</p>

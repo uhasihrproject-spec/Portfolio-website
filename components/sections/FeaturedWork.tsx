@@ -27,8 +27,9 @@ function tintFromSlug(slug: string) {
 
 function useFallbackSrc(candidates: string[]) {
   const [idx, setIdx] = useState(0);
-  const src = candidates[Math.min(idx, candidates.length - 1)] || "";
-  const onError = () => setIdx((i) => Math.min(i + 1, candidates.length - 1));
+  const safe = candidates.length ? candidates : ["/vercel.svg"];
+  const src = safe[Math.min(idx, safe.length - 1)] || "/vercel.svg";
+  const onError = () => setIdx((i) => Math.min(i + 1, safe.length - 1));
   return { src, onError };
 }
 

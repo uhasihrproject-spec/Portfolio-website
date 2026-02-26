@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
-import { TEAM_MEMBERS, getTeamImage } from "@/data/team";
+import { TEAM_MEMBERS } from "@/data/team";
 
 export default async function TeamMemberPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
   const p = await Promise.resolve(params);
@@ -18,8 +17,8 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
         <div className="mt-8 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] items-center">
           <div className="relative rounded-[34px] border border-violet-200 bg-white/90 p-4 shadow-[0_25px_60px_rgba(79,70,229,0.18)]">
             <div className="absolute -right-8 -top-8 h-36 w-36 rounded-full bg-indigo-200/50 blur-2xl" />
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[26px] bg-violet-50">
-              <Image src={getTeamImage(member)} alt={member.name} fill className="object-cover" />
+            <div className="grid aspect-[4/5] w-full place-items-center overflow-hidden rounded-[26px] bg-violet-50 text-7xl font-semibold text-indigo-500">
+              {member.name.split(" ").map((x) => x[0]).slice(0, 2).join("")}
             </div>
           </div>
 

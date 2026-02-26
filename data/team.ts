@@ -24,7 +24,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     intro: "Shapes identity systems that feel premium and remain consistent across print, social, and web.",
     skills: ["Brand Strategy", "Logo Systems", "Campaign Visuals", "Art Direction"],
     quote: "Every design decision should make the brand easier to trust.",
-    image: "/next.svg",
   },
   {
     slug: "daniel-adjetey",
@@ -34,7 +33,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     intro: "Builds conversion-focused graphics and social kits with clean hierarchy and strong storytelling.",
     skills: ["Social Templates", "Poster Design", "Typography", "Motion-ready Layouts"],
     quote: "Visual consistency is what turns casual viewers into loyal customers.",
-    image: "/next.svg",
   },
   {
     slug: "eldwin-asante",
@@ -45,7 +43,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     intro: "Leads architecture and shipping of reliable applications with smooth UX and scalable backend flows.",
     skills: ["Next.js", "Node APIs", "Data Modeling", "Performance"],
     quote: "Great software should feel invisible—fast, clear, and dependable.",
-    image: "/next.svg",
   },
   {
     slug: "malcolm-elih",
@@ -55,10 +52,9 @@ export const TEAM_MEMBERS: TeamMember[] = [
     intro: "Owns server-side reliability, integrations, and secure service orchestration for product backbones.",
     skills: ["API Design", "Security", "Database Tuning", "Cloud Workflows"],
     quote: "Strong backends make ambitious frontends possible.",
-    image: "/next.svg",
   },
 ];
 
 export function getTeamImage(member: TeamMember) {
-  return member.image || `/team/${member.slug}.png`;
+  return member.image;
 }

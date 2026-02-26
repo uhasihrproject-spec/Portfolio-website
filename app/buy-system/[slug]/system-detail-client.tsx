@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import Container from "@/components/ui/Container";
 import Badge from "@/components/ui/Badge";
 import type { SystemProduct } from "@/data/systems";
-import { getSystemImage } from "@/data/systems";
+
 
 export default function SystemDetailClient({ system }: { system: SystemProduct }) {
   const [open, setOpen] = useState(false);
@@ -44,7 +43,7 @@ export default function SystemDetailClient({ system }: { system: SystemProduct }
           <div className="relative overflow-hidden rounded-[30px] border border-violet-200 bg-white/90 p-4 shadow-[0_24px_60px_rgba(79,70,229,0.15)]">
             <div className="absolute -top-20 -right-16 h-56 w-56 rounded-full bg-indigo-200/45 blur-3xl" />
             <div className="relative aspect-[4/3] w-full rounded-2xl border border-violet-200 bg-violet-50">
-              <Image src={getSystemImage(system)} alt={system.name} fill className="object-contain p-8" />
+              <div className="grid h-full w-full place-items-center text-5xl font-semibold text-indigo-500">{system.name.split(" ").map((x) => x[0]).slice(0, 2).join("")}</div>
             </div>
           </div>
         </div>
@@ -59,7 +58,7 @@ export default function SystemDetailClient({ system }: { system: SystemProduct }
                 <button onClick={() => setOpen(false)} className="rounded-full border border-violet-200 px-3 py-1 text-xs font-semibold text-slate-700">Close</button>
               </div>
               <div className="relative aspect-[16/9] w-full bg-violet-50">
-                <Image src={getSystemImage(system)} alt={`${system.name} preview`} fill className="object-contain p-8" />
+                <div className="grid h-full w-full place-items-center text-5xl font-semibold text-indigo-500">{system.name.split(" ").map((x) => x[0]).slice(0, 2).join("")}</div>
               </div>
             </motion.div>
           </motion.div>

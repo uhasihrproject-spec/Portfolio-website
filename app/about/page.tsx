@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Badge from "@/components/ui/Badge";
 import FadeIn from "@/components/ui/FadeIn";
-import { TEAM_MEMBERS, getTeamImage } from "@/data/team";
+import { TEAM_MEMBERS } from "@/data/team";
 
 export default function AboutPage() {
   return (
@@ -26,8 +25,8 @@ export default function AboutPage() {
             <FadeIn key={member.slug} delay={0.04 * i}>
               <Link href={`/team/${member.slug}`} className="group block rounded-[26px] border border-violet-200 bg-white/88 p-4 sm:p-5 shadow-[0_15px_40px_rgba(79,70,229,0.12)] transition hover:-translate-y-1">
                 <div className="grid gap-5 sm:grid-cols-[120px_1fr_auto] items-center">
-                  <div className="relative h-[120px] w-[120px] overflow-hidden rounded-2xl border border-violet-200 bg-violet-50">
-                    <Image src={getTeamImage(member)} alt={member.name} fill className="object-cover" />
+                  <div className="grid h-[120px] w-[120px] place-items-center overflow-hidden rounded-2xl border border-violet-200 bg-violet-50 text-3xl font-semibold text-indigo-500">
+                    {member.name.split(" ").map((x) => x[0]).slice(0, 2).join("")}
                   </div>
                   <div>
                     <p className="text-xl font-semibold text-slate-900">{member.name}</p>
