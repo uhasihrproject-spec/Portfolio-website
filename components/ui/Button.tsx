@@ -23,12 +23,12 @@ export default function Button({
   className?: string;
 }) {
   const base =
-    "inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20";
+    "inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-300";
 
   const styles =
     variant === "primary"
-      ? "bg-[var(--mint)] text-black hover:brightness-95 active:scale-[0.99]"
-      : "border border-white/15 bg-white/5 text-white hover:bg-white/10 active:scale-[0.99]";
+      ? "bg-[var(--mint)] text-slate-900 hover:brightness-95 active:scale-[0.99]"
+      : "border border-violet-200 bg-violet-50 text-slate-900 hover:bg-violet-100 active:scale-[0.99]";
 
   const cls = cx(base, styles, className);
 

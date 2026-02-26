@@ -41,7 +41,7 @@ export default function Testimonials() {
         r: "Founder",
         c: "Skintone Studio",
         q: "The site feels expensive. Clean spacing, fast load, and the animations are calm — exactly the premium vibe I wanted.",
-        accent: "rgba(79,215,255,0.22)",
+        accent: "rgba(109,94,252,0.22)",
         bgSrc: "/testimonials/01.jpg",
       },
       {
@@ -49,7 +49,7 @@ export default function Testimonials() {
         r: "Business Owner",
         c: "Prime Auto Parts",
         q: "They didn’t just design — they structured the page to convert. Calls started coming in the same week we launched.",
-        accent: "rgba(46,229,157,0.20)",
+        accent: "rgba(59,130,246,0.20)",
         bgSrc: "/testimonials/02.jpg",
       },
       {
@@ -57,7 +57,7 @@ export default function Testimonials() {
         r: "Creative Director",
         c: "Palm & Ink",
         q: "The identity system is consistent everywhere now. The templates alone saved us hours every week.",
-        accent: "rgba(255,180,140,0.18)",
+        accent: "rgba(124,58,237,0.18)",
         bgSrc: "/testimonials/03.jpg",
       },
       {
@@ -65,7 +65,7 @@ export default function Testimonials() {
         r: "Startup Founder",
         c: "Trackly",
         q: "Our UI was okay before — now it’s trusted. The product feels polished, clear, and easy to use. Investors noticed.",
-        accent: "rgba(140,160,255,0.18)",
+        accent: "rgba(99,102,241,0.18)",
         bgSrc: "/testimonials/04.jpg",
       },
       {
@@ -172,7 +172,7 @@ export default function Testimonials() {
       ref={(n) => {
         sectionRef.current = n;
       }}
-      className="relative border-t border-white/10 overflow-hidden min-h-[100svh] flex items-center"
+      className="relative border-t border-violet-200 overflow-hidden min-h-[100svh] flex items-center"
       style={{ ["--accent" as any]: accent }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -224,7 +224,7 @@ export default function Testimonials() {
                 className="absolute inset-0"
                 style={{
                   background:
-                    "radial-gradient(circle at 28% 18%, var(--accent), rgba(0,0,0,0.40) 55%, rgba(0,0,0,0.58) 100%)",
+                    "radial-gradient(circle at 28% 18%, var(--accent), rgba(148,163,184,0.22) 55%, rgba(255,255,255,0.42) 100%)",
                   filter: "blur(18px)",
                   transform: "scale(1.08)",
                   opacity: 0.95,
@@ -232,7 +232,7 @@ export default function Testimonials() {
               />
 
               {/* Soft overall dim so image never fights */}
-              <div className="absolute inset-0 bg-black/25" />
+              <div className="absolute inset-0 bg-white/70" />
 
               {/* subtle grid */}
               <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:220px_220px]" />
@@ -252,18 +252,18 @@ export default function Testimonials() {
 
       {/* Text-safe scrim (locks contrast no matter the image) */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_35%,rgba(0,0,0,0.12),rgba(0,0,0,0.72)_60%,rgba(0,0,0,0.88)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_35%,rgba(148,163,184,0.12),rgba(255,255,255,0.5)_60%,rgba(255,255,255,0.62)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-violet-300/35 to-transparent" />
       </div>
 
       <Container className="relative z-10 py-14 sm:py-20 w-full">
         <div className="flex items-end justify-between gap-6 flex-wrap">
           <div className="max-w-2xl">
             <Badge>TESTIMONIALS</Badge>
-            <h2 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white">
+            <h2 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-slate-900">
               People notice the quality.
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-white/70 leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
               Tap the quote to pause/play. Hover pauses on desktop.
             </p>
           </div>
@@ -271,7 +271,7 @@ export default function Testimonials() {
           <button
             type="button"
             onClick={() => setPaused((v) => !v)}
-            className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-black/25 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-white/85 hover:bg-white/10 transition"
+            className="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-white/70 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-slate-900 hover:bg-violet-100 transition"
             style={{ backdropFilter: "blur(10px)" }}
             aria-pressed={paused}
             aria-label={paused ? "Play testimonials" : "Pause testimonials"}
@@ -306,24 +306,24 @@ export default function Testimonials() {
                       className="inline-block max-w-5xl rounded-[28px] px-6 py-7 sm:px-8 sm:py-8"
                       style={{
                         background:
-                          "linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.28))",
+                          "linear-gradient(180deg, rgba(148,163,184,0.25), rgba(148,163,184,0.16))",
                         border: "1px solid rgba(255,255,255,0.10)",
-                        boxShadow: "0 20px 80px rgba(0,0,0,0.45)",
+                        boxShadow: "0 20px 80px rgba(148,163,184,0.25)",
                         backdropFilter: "blur(10px)",
                       }}
                     >
                       <blockquote>
-                        <p className="text-2xl sm:text-4xl leading-relaxed tracking-[-0.02em] text-white/92">
+                        <p className="text-2xl sm:text-4xl leading-relaxed tracking-[-0.02em] text-slate-900">
                           “{it.q}”
                         </p>
 
                         <div className="mt-10 flex items-center gap-6">
-                          <div className="h-px w-12 bg-white/20" />
+                          <div className="h-px w-12 bg-violet-200" />
                           <div className="min-w-0">
-                            <p className="text-sm font-semibold text-white truncate">
+                            <p className="text-sm font-semibold text-slate-900 truncate">
                               {it.n} • {it.r}
                             </p>
-                            <p className="text-xs text-white/60 tracking-wide truncate">
+                            <p className="text-xs text-slate-500 tracking-wide truncate">
                               {it.c}
                             </p>
                           </div>
@@ -353,20 +353,20 @@ export default function Testimonials() {
               <span
                 className={cx(
                   "block rounded-full transition-all duration-700",
-                  i === active ? "bg-white/80" : "bg-white/20 group-hover:bg-white/35"
+                  i === active ? "bg-white/70" : "bg-violet-200 group-hover:bg-white/35"
                 )}
                 style={{ width: i === active ? 28 : 8, height: 6 }}
               />
             </button>
           ))}
-          <div className="ml-2 text-[11px] font-semibold tracking-[0.22em] text-white/45">
+          <div className="ml-2 text-[11px] font-semibold tracking-[0.22em] text-slate-400">
             {String(active + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </div>
         </div>
 
-        <div className="mt-5 text-xs text-white/45">
-          Add images to <span className="text-white/65">/public/testimonials/01.jpg</span> …{" "}
-          <span className="text-white/65">10.jpg</span>.
+        <div className="mt-5 text-xs text-slate-400">
+          Add images to <span className="text-slate-600">/public/testimonials/01.jpg</span> …{" "}
+          <span className="text-slate-600">10.jpg</span>.
         </div>
       </Container>
     </section>

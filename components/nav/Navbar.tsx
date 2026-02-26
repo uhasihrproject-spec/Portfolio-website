@@ -27,7 +27,7 @@ const services = [
 function Brand() {
   return (
     <Link href="/" className="inline-flex items-center gap-2">
-      <span className="text-white font-semibold tracking-[-0.02em]">
+      <span className="text-slate-900 font-semibold tracking-[-0.02em]">
         {BRAND}
         <span className="text-[var(--mint)]">.</span>
       </span>
@@ -39,8 +39,8 @@ function UnderlineLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="relative text-sm font-medium text-white/75 hover:text-white transition
-                 after:absolute after:left-0 after:-bottom-2 after:h-px after:w-0 after:bg-white/60
+      className="relative text-sm font-medium text-slate-700 hover:text-slate-900 transition
+                 after:absolute after:left-0 after:-bottom-2 after:h-px after:w-0 after:bg-white/70
                  hover:after:w-full after:transition-all after:duration-300"
     >
       {label}
@@ -60,7 +60,7 @@ function GlowLoop({ strength = "strong" }: { strength?: "soft" | "strong" }) {
         animate={{ x: [-40, 40, -40], y: [0, 20, 0] }}
         transition={{ duration: 9.5, repeat: Infinity, ease: "easeInOut" }}
         style={{
-          background: `radial-gradient(circle at 40% 40%, rgba(79,215,255,${a}), transparent 62%)`,
+          background: `radial-gradient(circle at 40% 40%, rgba(109,94,252,${a}), transparent 62%)`,
         }}
       />
       <motion.div
@@ -68,7 +68,7 @@ function GlowLoop({ strength = "strong" }: { strength?: "soft" | "strong" }) {
         animate={{ x: [34, -34, 34], y: [0, -22, 0] }}
         transition={{ duration: 11.5, repeat: Infinity, ease: "easeInOut" }}
         style={{
-          background: `radial-gradient(circle at 45% 45%, rgba(46,229,157,${b}), transparent 62%)`,
+          background: `radial-gradient(circle at 45% 45%, rgba(59,130,246,${b}), transparent 62%)`,
         }}
       />
       <div
@@ -100,7 +100,7 @@ function ServicesDropdown({
         <>
           <motion.button
             aria-label="Close dropdown"
-            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-white/70 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -108,7 +108,7 @@ function ServicesDropdown({
           />
 
           <motion.div
-            className="fixed left-0 right-0 top-[64px] z-50 border-b border-white/10 bg-[rgba(7,10,15,0.90)] backdrop-blur-xl"
+            className="fixed left-0 right-0 top-[64px] z-50 border-b border-violet-200 bg-white/90 backdrop-blur-xl"
             initial={reduce ? { opacity: 0 } : { y: -10, opacity: 0 }}
             animate={reduce ? { opacity: 1 } : { y: 0, opacity: 1 }}
             exit={reduce ? { opacity: 0 } : { y: -8, opacity: 0 }}
@@ -116,7 +116,7 @@ function ServicesDropdown({
           >
             <div className="absolute inset-0">
               <GlowLoop strength="soft" />
-              <div className="absolute inset-0 bg-black/15" />
+              <div className="absolute inset-0 bg-white/70" />
             </div>
 
             <Container className="relative z-10 py-6">
@@ -126,13 +126,13 @@ function ServicesDropdown({
                     key={s.href}
                     href={s.href}
                     onClick={onClose}
-                    className="group border border-white/12 bg-white/5 p-4 hover:bg-white/10 transition"
+                    className="group border border-violet-200 bg-violet-50 p-4 hover:bg-violet-100 transition"
                   >
                     <div className="flex items-center justify-between gap-4">
-                      <p className="text-sm font-semibold text-white/85">{s.label}</p>
-                      <span className="text-white/40 group-hover:translate-x-0.5 transition">→</span>
+                      <p className="text-sm font-semibold text-slate-900">{s.label}</p>
+                      <span className="text-slate-400 group-hover:translate-x-0.5 transition">→</span>
                     </div>
-                    <p className="mt-1 text-xs text-white/60">{s.desc}</p>
+                    <p className="mt-1 text-xs text-slate-500">{s.desc}</p>
                   </Link>
                 ))}
               </div>
@@ -185,7 +185,7 @@ function MobileFullscreenMenu({
         >
           {/* fullscreen base */}
           <motion.div
-            className="absolute inset-0 bg-[#070A0F]"
+            className="absolute inset-0 bg-white"
             initial={reduce ? false : { opacity: 0 }}
             animate={reduce ? {} : { opacity: 1 }}
             exit={reduce ? {} : { opacity: 0 }}
@@ -195,10 +195,10 @@ function MobileFullscreenMenu({
           {/* wow background */}
           <div className="pointer-events-none absolute inset-0">
             <GlowLoop strength="strong" />
-            <div className="absolute inset-0 bg-black/25" />
+            <div className="absolute inset-0 bg-white/70" />
             {/* BIG watermark */}
             <div className="absolute left-4 right-4 top-6 select-none">
-              <div className="text-[44px] leading-[0.9] font-semibold tracking-[-0.05em] text-white/20">
+              <div className="text-[44px] leading-[0.9] font-semibold tracking-[-0.05em] text-slate-200">
                 {BRAND.toUpperCase()}
               </div>
             </div>
@@ -213,12 +213,12 @@ function MobileFullscreenMenu({
             transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* top bar */}
-            <div className="border-b border-white/10 bg-black/20 backdrop-blur-xl">
+            <div className="border-b border-violet-200 bg-white/70 backdrop-blur-xl">
               <Container className="h-16 flex items-center justify-between">
                 <Brand />
                 <button
                   onClick={onClose}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/85 hover:bg-white/10 transition"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-violet-200 bg-violet-50 text-slate-900 hover:bg-violet-100 transition"
                   aria-label="Close menu"
                 >
                   ✕
@@ -234,17 +234,17 @@ function MobileFullscreenMenu({
                     key={l.href}
                     href={l.href}
                     onClick={onClose}
-                    className="group flex items-center justify-between rounded-2xl border border-white/12 bg-white/5 px-5 py-4 text-white/90 hover:bg-white/10 transition"
+                    className="group flex items-center justify-between rounded-2xl border border-violet-200 bg-violet-50 px-5 py-4 text-slate-900/90 hover:bg-violet-100 transition"
                   >
                     <span className="text-lg font-semibold">{l.label}</span>
-                    <span className="text-white/45 transition group-hover:translate-x-0.5">→</span>
+                    <span className="text-slate-400 transition group-hover:translate-x-0.5">→</span>
                   </Link>
                 ))}
               </div>
 
               {/* services section */}
               <div className="mt-8">
-                <p className="text-xs font-semibold tracking-[0.22em] text-white/55">
+                <p className="text-xs font-semibold tracking-[0.22em] text-slate-500">
                   SERVICES
                 </p>
                 <div className="mt-3 grid gap-2">
@@ -253,13 +253,13 @@ function MobileFullscreenMenu({
                       key={s.href}
                       href={s.href}
                       onClick={onClose}
-                      className="border border-white/10 bg-white/5 px-5 py-4 text-white/80 hover:bg-white/10 hover:text-white transition"
+                      className="border border-violet-200 bg-violet-50 px-5 py-4 text-slate-800 hover:bg-violet-100 hover:text-slate-900 transition"
                     >
                       <div className="flex items-center justify-between gap-4">
                         <p className="text-sm font-semibold">{s.label}</p>
-                        <span className="text-white/40">→</span>
+                        <span className="text-slate-400">→</span>
                       </div>
-                      <p className="mt-1 text-xs text-white/55">{s.desc}</p>
+                      <p className="mt-1 text-xs text-slate-500">{s.desc}</p>
                     </Link>
                   ))}
                 </div>
@@ -270,21 +270,21 @@ function MobileFullscreenMenu({
                 <Link
                   href="/contact"
                   onClick={onClose}
-                  className="inline-flex items-center justify-center rounded-full bg-[var(--mint)] px-6 py-3.5 text-sm font-semibold text-black hover:brightness-95 transition"
+                  className="inline-flex items-center justify-center rounded-full bg-[var(--mint)] px-6 py-3.5 text-sm font-semibold text-slate-900 hover:brightness-95 transition"
                 >
                   Request a quote
                 </Link>
                 <Link
                   href="/work"
                   onClick={onClose}
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition"
+                  className="inline-flex items-center justify-center rounded-full border border-violet-200 bg-violet-50 px-6 py-3.5 text-sm font-semibold text-slate-900 hover:bg-violet-100 transition"
                 >
                   View work
                 </Link>
               </div>
 
               {/* bottom mini line */}
-              <div className="mt-10 pt-6 border-t border-white/10 text-xs text-white/50 flex items-center justify-between">
+              <div className="mt-10 pt-6 border-t border-violet-200 text-xs text-slate-500 flex items-center justify-between">
                 <span>Accra • Remote-ready</span>
                 <span>ankaraauragh@gmail.com</span>
               </div>
@@ -303,9 +303,9 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-50">
-        <div className="relative border-b border-white/10 bg-black/25 backdrop-blur-xl">
+        <div className="relative border-b border-violet-200 bg-white/70 backdrop-blur-xl">
           <GlowLoop strength="soft" />
-          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-0 bg-white/70" />
 
           <Container className="relative z-10 h-16 flex items-center justify-between gap-5">
             <Brand />
@@ -317,14 +317,14 @@ export default function Navbar() {
                 onClick={() => setServicesOpen((v) => !v)}
                 className={cx(
                   "relative text-sm font-medium transition",
-                  servicesOpen ? "text-white" : "text-white/75 hover:text-white"
+                  servicesOpen ? "text-slate-900" : "text-slate-700 hover:text-slate-900"
                 )}
               >
                 Services
                 <span className={cx("ml-2 inline-block transition", servicesOpen && "rotate-180")}>▾</span>
                 <span
                   className={cx(
-                    "absolute left-0 -bottom-2 h-px bg-white/60 transition-all duration-300",
+                    "absolute left-0 -bottom-2 h-px bg-white/70 transition-all duration-300",
                     servicesOpen ? "w-full" : "w-0"
                   )}
                 />
@@ -339,14 +339,14 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/contact"
-                className="hidden sm:inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition"
+                className="hidden sm:inline-flex items-center justify-center rounded-full border border-violet-200 bg-violet-50 px-5 py-2.5 text-sm font-semibold text-slate-900 hover:bg-violet-100 transition"
               >
                 Get a quote
               </Link>
 
               <button
                 onClick={() => setMobileOpen(true)}
-                className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/85 hover:bg-white/10 transition"
+                className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-violet-200 bg-violet-50 text-slate-900 hover:bg-violet-100 transition"
                 aria-label="Open menu"
               >
                 ☰

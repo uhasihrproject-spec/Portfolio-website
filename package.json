@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:pr:binaries": "node scripts/check-no-binaries.mjs staged",
+    "check:pr:binaries:branch": "node scripts/check-no-binaries.mjs branch"
   },
   "dependencies": {
     "framer-motion": "^12.34.3",

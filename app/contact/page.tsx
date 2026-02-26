@@ -4,6 +4,7 @@ import Container from "@/components/ui/Container";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import { useState } from "react";
+import FadeIn from "@/components/ui/FadeIn";
 
 export default function ContactPage() {
   const [name, setName] = useState("");
@@ -18,34 +19,34 @@ export default function ContactPage() {
   return (
     <section>
       <Container className="py-16">
-        <Badge>CONTACT</Badge>
-        <h1 className="mt-4 text-4xl sm:text-5xl font-semibold tracking-[-0.04em] text-white">
+        <FadeIn><Badge>CONTACT</Badge></FadeIn>
+        <FadeIn delay={0.05}><h1 className="mt-4 text-4xl sm:text-5xl font-semibold tracking-[-0.04em] text-slate-900">
           Let’s build something premium.
-        </h1>
-        <p className="mt-3 text-white/70 max-w-2xl">
+        </h1></FadeIn>
+        <FadeIn delay={0.1}><p className="mt-3 text-slate-600 max-w-2xl">
           Send your scope, deadline, and budget range. We’ll reply with a clean plan.
-        </p>
+        </p></FadeIn>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <div className="border border-white/10 bg-white/5 p-6">
-            <p className="text-xs font-semibold tracking-[0.18em] text-white/60">QUICK FORM</p>
+        <FadeIn delay={0.15} className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="border border-violet-200 bg-violet-50 p-6">
+            <p className="text-xs font-semibold tracking-[0.18em] text-slate-500">QUICK FORM</p>
 
             <div className="mt-4 grid gap-3">
               <input
-                className="border border-white/12 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:ring-2 focus:ring-white/15 placeholder:text-white/40"
+                className="border border-violet-200 bg-violet-50 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-violet-300 placeholder:text-slate-400"
                 placeholder="Your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
               <input
-                className="border border-white/12 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:ring-2 focus:ring-white/15 placeholder:text-white/40"
+                className="border border-violet-200 bg-violet-50 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-violet-300 placeholder:text-slate-400"
                 placeholder="name@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
               />
               <textarea
-                className="border border-white/12 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:ring-2 focus:ring-white/15 placeholder:text-white/40 min-h-[140px]"
+                className="border border-violet-200 bg-violet-50 px-4 py-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-violet-300 placeholder:text-slate-400 min-h-[140px]"
                 placeholder="Tell us what you want (pages/features, style references, deadline, budget range)..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -59,38 +60,38 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="border border-white/10 bg-white/5 p-6">
-            <p className="text-xs font-semibold tracking-[0.18em] text-white/60">DIRECT</p>
+          <div className="border border-violet-200 bg-violet-50 p-6">
+            <p className="text-xs font-semibold tracking-[0.18em] text-slate-500">DIRECT</p>
 
-            <div className="mt-4 grid gap-3 text-sm text-white/75">
-              <p><span className="text-white/85 font-semibold">Email:</span> ankaraauragh@gmail.com</p>
-              <p><span className="text-white/85 font-semibold">Location:</span> Accra, Ghana</p>
+            <div className="mt-4 grid gap-3 text-sm text-slate-700">
+              <p><span className="text-slate-900 font-semibold">Email:</span> ankaraauragh@gmail.com</p>
+              <p><span className="text-slate-900 font-semibold">Location:</span> Accra, Ghana</p>
             </div>
 
             <div className="mt-8 grid gap-3">
               <a
                 href={`https://wa.me/${whatsapp}?text=${waText}`}
-                className="inline-flex items-center justify-center bg-[var(--mint)] px-6 py-3 text-sm font-semibold text-black hover:brightness-95 transition"
+                className="inline-flex items-center justify-center bg-[var(--mint)] px-6 py-3 text-sm font-semibold text-slate-900 hover:brightness-95 transition"
               >
                 WhatsApp us
               </a>
 
               <a
                 href={`mailto:ankaraauragh@gmail.com?subject=${encodeURIComponent("Project Inquiry")}&body=${waText}`}
-                className="inline-flex items-center justify-center border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
+                className="inline-flex items-center justify-center border border-violet-200 bg-violet-50 px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-violet-100 transition"
               >
                 Email us
               </a>
             </div>
 
-            <div className="mt-8 border border-white/10 bg-white/5 p-5">
-              <p className="text-xs font-semibold tracking-[0.18em] text-white/60">NOTE</p>
-              <p className="mt-2 text-sm text-white/70 leading-relaxed">
+            <div className="mt-8 border border-violet-200 bg-violet-50 p-5">
+              <p className="text-xs font-semibold tracking-[0.18em] text-slate-500">NOTE</p>
+              <p className="mt-2 text-sm text-slate-600 leading-relaxed">
                 Add your real WhatsApp number and replace the placeholders on the case studies with real images.
               </p>
             </div>
           </div>
-        </div>
+        </FadeIn>
       </Container>
     </section>
   );

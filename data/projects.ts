@@ -7,9 +7,37 @@ export type Project = {
   year: string;
   blurb: string;
   tags: string[];
+  /**
+   * Optional custom cover image for cards.
+   * Default used when omitted: /public/projects/<slug>.png
+   */
+  coverImage?: string;
+  /**
+   * Optional folder for extra case-study images.
+   * Default used when omitted: /public/projects/<slug>/
+   */
+  imageFolder?: string;
 };
 
+/**
+ * HOW TO ADD A NEW PROJECT (quick copy/paste)
+ * 1) Duplicate any object below.
+ * 2) Change slug/title/category/year/blurb/tags.
+ * 3) Put your cover image at /public/projects/<slug>.png
+ *    OR set `coverImage: "/projects/your-file.png"`.
+ * 4) Optional case-study set goes in /public/projects/<slug>/
+ */
+export const PROJECT_IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "webp", "avif"] as const;
+
 export const PROJECTS: Project[] = [
+  {
+    slug: "brand-identity-belindas-mart",
+    title: "BRAND IDENTITY Belindas mart",
+    category: "Branding",
+    year: "2026",
+    blurb: "A polished visual identity system built for consistent brand recognition.",
+    tags: ["Identity", "Brand Guide", "Print + Social"],
+  },
   {
     slug: "mint-studio-website",
     title: "Studio Website (Premium Web Build)",
@@ -58,7 +86,27 @@ export const PROJECTS: Project[] = [
     blurb: "Bold, clean flyers designed for both print and social.",
     tags: ["Print", "Social", "Grid"],
   },
+  {
+    slug: "event-brand-rollout",
+    title: "Event Brand Rollout",
+    category: "Graphics",
+    year: "2026",
+    blurb: "Campaign artwork system for event banners, stories, and promo assets.",
+    tags: ["Campaign", "Posters", "Assets"],
+  },
 ];
 
-export const CATEGORIES: Array<ProjectCategory | "All"> = ["All", "Web", "Graphics", "Branding", "Systems"];
+export function getProjectCover(project: Project) {
+  return project.coverImage || `/projects/${project.slug}.png`;
+}
 
+export function getProjectImageFolder(project: Project) {
+  return project.imageFolder || `/projects/${project.slug}`;
+}
+
+export function getProjectCoverCandidates(project: Project) {
+  if (project.coverImage) return [project.coverImage];
+  return PROJECT_IMAGE_EXTENSIONS.map((ext) => `/projects/${project.slug}.${ext}`);
+}
+
+export const CATEGORIES: Array<ProjectCategory | "All"> = ["All", "Web", "Graphics", "Branding", "Systems"];
