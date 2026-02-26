@@ -14,8 +14,22 @@ export default function SystemDetailClient({ system }: { system: SystemProduct }
   const msg = encodeURIComponent(`Hi, I want the ${system.name}. Please share full pricing, timeline, and onboarding requirements.`);
 
   return (
-    <main className="relative overflow-hidden border-t border-violet-200">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_12%,rgba(109,94,252,0.16),transparent_55%),radial-gradient(circle_at_90%_15%,rgba(59,130,246,0.14),transparent_48%)]" />
+    <main className="relative overflow-hidden border-t border-violet-200 bg-white/70">
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-white/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_12%,rgba(109,94,252,0.16),transparent_55%),radial-gradient(circle_at_90%_15%,rgba(59,130,246,0.14),transparent_48%)]" />
+        <div className="absolute inset-0">
+          <Image
+            src={getSystemHomepagePreviewImage(system)}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover scale-110"
+            style={{ opacity: 0.09, filter: "blur(14px) saturate(1.03) contrast(1.02)" }}
+          />
+        </div>
+      </div>
       <Container className="relative z-10 py-16 sm:py-20 space-y-12">
         <section>
           <Link href="/buy-system" className="text-xs font-semibold tracking-[0.2em] text-slate-500">← BACK TO SYSTEMS</Link>

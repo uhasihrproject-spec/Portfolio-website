@@ -34,40 +34,43 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-violet-200/80 bg-white/80 backdrop-blur-xl">
-      <Container className="h-16 flex items-center justify-between">
-        <Link href="/" className="font-semibold tracking-[-0.02em] text-slate-900">Prem Studio<span className="text-indigo-600">.</span></Link>
+    <>
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-violet-200 bg-white/95 shadow-[0_8px_28px_rgba(15,23,42,0.06)] backdrop-blur-xl">
+        <Container className="h-16 flex items-center justify-between">
+          <Link href="/" className="font-semibold tracking-[-0.02em] text-slate-900">Prem Studio<span className="text-indigo-600">.</span></Link>
 
-        <nav className="hidden md:flex items-center gap-7">
-          {navLinks.map((l) => <NavItem key={l.href} href={l.href} label={l.label} pathname={pathname} />)}
-        </nav>
+          <nav className="hidden md:flex items-center gap-7">
+            {navLinks.map((l) => <NavItem key={l.href} href={l.href} label={l.label} pathname={pathname} />)}
+          </nav>
 
-        <div className="flex items-center gap-2">
-          <Link href="/contact" className="hidden sm:inline-flex items-center rounded-full bg-[var(--mint)] px-5 py-2.5 text-sm font-semibold text-white">Let&apos;s Talk</Link>
-          <button onClick={() => setOpen(true)} className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-white text-slate-900" aria-label="Open menu">☰</button>
-        </div>
-      </Container>
+          <div className="flex items-center gap-2">
+            <Link href="/contact" className="hidden sm:inline-flex items-center rounded-full bg-[var(--mint)] px-5 py-2.5 text-sm font-semibold text-white">Let&apos;s Talk</Link>
+            <button onClick={() => setOpen(true)} className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-white text-slate-900" aria-label="Open menu">☰</button>
+          </div>
+        </Container>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[80] bg-slate-950/70 backdrop-blur-md md:hidden">
-            <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 20, opacity: 0 }} className="h-full w-full bg-white">
-              <Container className="h-16 flex items-center justify-between border-b border-violet-200">
-                <p className="font-semibold text-slate-900">Menu</p>
-                <button onClick={() => setOpen(false)} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200">✕</button>
-              </Container>
-              <Container className="py-10 flex flex-col gap-8">
-                {navLinks.map((l) => (
-                  <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className={`text-3xl font-semibold tracking-[-0.03em] ${isActive(pathname, l.href) ? "text-indigo-600" : "text-slate-900"}`}>
-                    {l.label}
-                  </Link>
-                ))}
-                <Link href="/contact" onClick={() => setOpen(false)} className="mt-4 inline-flex w-fit rounded-full bg-[var(--mint)] px-6 py-3 text-sm font-semibold text-white">Start Project</Link>
-              </Container>
+        <AnimatePresence>
+          {open && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[80] bg-slate-950/55 backdrop-blur-sm md:hidden">
+              <motion.div initial={{ y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 12, opacity: 0 }} className="min-h-screen w-full bg-white">
+                <Container className="h-16 flex items-center justify-between border-b border-violet-200 bg-white">
+                  <p className="font-semibold text-slate-900">Menu</p>
+                  <button onClick={() => setOpen(false)} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-white">✕</button>
+                </Container>
+                <Container className="py-10 flex flex-col gap-8 bg-white">
+                  {navLinks.map((l) => (
+                    <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className={`text-3xl font-semibold tracking-[-0.03em] ${isActive(pathname, l.href) ? "text-indigo-600" : "text-slate-900"}`}>
+                      {l.label}
+                    </Link>
+                  ))}
+                  <Link href="/contact" onClick={() => setOpen(false)} className="mt-4 inline-flex w-fit rounded-full bg-[var(--mint)] px-6 py-3 text-sm font-semibold text-white">Start Project</Link>
+                </Container>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+          )}
+        </AnimatePresence>
+      </header>
+      <div className="h-16" aria-hidden />
+    </>
   );
 }
