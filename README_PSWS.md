@@ -117,3 +117,8 @@ Use query params to prefill contact page:
 ```
 
 Slug helper route is available: `/contact/[slug]` (auto-redirects to prefilled query).
+
+## 11) Team profile pages
+- Individual pages: `app/team/[slug]/page.tsx`
+- Team data source: `data/team.ts`
+- About page links to each profile.

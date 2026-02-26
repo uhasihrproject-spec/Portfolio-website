@@ -45,9 +45,10 @@ function buildCandidates(pathNoExt: string) {
 
 function useFallbackImageSrc(candidates: string[]) {
   const [idx, setIdx] = useState(0);
-  const src = candidates[Math.min(idx, candidates.length - 1)];
+  const safe = candidates.length ? candidates : ["/next.svg"];
+  const src = safe[Math.min(idx, safe.length - 1)];
   function onError() {
-    setIdx((v) => Math.min(v + 1, candidates.length - 1));
+    setIdx((v) => Math.min(v + 1, (candidates.length ? candidates : ["/next.svg"]).length - 1));
   }
   return { src, onError };
 }
@@ -206,7 +207,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
             priority
             sizes="100vw"
             className="object-cover scale-110"
-            style={{ opacity: 0.22, filter: "blur(28px) saturate(1.05) contrast(1.06)" }}
+            style={{ opacity: 0.12, filter: "blur(14px) saturate(1.03) contrast(1.03)" }}
           />
         </div>
 
@@ -219,7 +220,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
             priority
             sizes="100vw"
             className="object-cover scale-[1.03]"
-            style={{ opacity: 0.12, filter: "blur(2px) saturate(1.05)" }}
+            style={{ opacity: 0.28, filter: "blur(0.5px) saturate(1.02)" }}
           />
         </div>
 

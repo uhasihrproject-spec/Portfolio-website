@@ -20,6 +20,7 @@ export const SYSTEM_PRODUCTS: SystemProduct[] = [
     audience: "Retail stores and marts",
     priceFrom: "From GHS 8,500",
     highlights: ["POS + receipts", "Stock alerts", "Role permissions", "Daily reports"],
+    image: "/next.svg",
   },
   {
     slug: "file-records-system",
@@ -28,6 +29,7 @@ export const SYSTEM_PRODUCTS: SystemProduct[] = [
     audience: "Schools, NGOs, admin offices",
     priceFrom: "From GHS 6,900",
     highlights: ["Smart search", "Version history", "Access logs", "Export tools"],
+    image: "/next.svg",
   },
   {
     slug: "church-auto-verse-detector",
@@ -36,6 +38,7 @@ export const SYSTEM_PRODUCTS: SystemProduct[] = [
     audience: "Church media teams",
     priceFrom: "From GHS 5,500",
     highlights: ["Live verse detection", "Projection mode", "Multi-translation ready", "Service history"],
+    image: "/next.svg",
   },
 ];
 
