@@ -71,11 +71,30 @@ export default function ContactClient() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(109,94,252,0.18),transparent_55%),radial-gradient(circle_at_90%_0%,rgba(59,130,246,0.18),transparent_45%)]" />
       <Container className="relative z-10 py-16 sm:py-20">
         <Badge>CONTACT</Badge>
-        <h1 className="mt-4 text-4xl sm:text-6xl font-semibold tracking-[-0.04em] text-slate-900">Let&apos;s build your next wow project.</h1>
-        <p className="mt-4 max-w-3xl text-slate-600 leading-relaxed">Premium websites, branding, graphics, and systems. Share your vision and we&apos;ll return a sharp roadmap.</p>
+
+        <section className="mt-6 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] items-center">
+          <div>
+            <h1 className="text-4xl sm:text-6xl font-semibold tracking-[-0.05em] text-slate-900">Let&apos;s build your next wow project.</h1>
+            <p className="mt-5 max-w-2xl text-slate-600 leading-relaxed">Premium websites, branding, graphics, and systems. Share your vision and we&apos;ll return a sharp roadmap.</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href="#contact-form" className="inline-flex rounded-full bg-[var(--mint)] px-6 py-3 text-sm font-semibold text-white">Start brief</a>
+              <a href={`https://wa.me/${whatsapp}?text=${waText}`} className="inline-flex rounded-full border border-violet-200 bg-white px-6 py-3 text-sm font-semibold text-slate-800">WhatsApp quick chat</a>
+            </div>
+          </div>
+
+          <div className="rounded-[28px] border border-violet-200 bg-white/90 p-6 sm:p-7">
+            <p className="text-xs font-semibold tracking-[0.2em] text-slate-500">FAST RESPONSE</p>
+            <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-slate-900">Tell us what you need.</h2>
+            <p className="mt-3 text-slate-600">Send your goal, timeline, and budget range. We usually respond with next steps shortly.</p>
+            <div className="mt-5 space-y-1 text-slate-700">
+              <p><span className="font-semibold text-slate-900">Email:</span> ankaraauragh@gmail.com</p>
+              <p><span className="font-semibold text-slate-900">Location:</span> Accra, Ghana</p>
+            </div>
+          </div>
+        </section>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-          <motion.form initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }} onSubmit={submitLead} className="relative overflow-hidden rounded-[28px] border border-violet-200 bg-white/85 p-6 sm:p-8 shadow-[0_20px_50px_rgba(79,70,229,0.15)]">
+          <motion.form initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }} onSubmit={submitLead} id="contact-form" className="relative overflow-hidden rounded-[28px] border border-violet-200 bg-white/85 p-6 sm:p-8 shadow-[0_20px_50px_rgba(79,70,229,0.15)]">
             <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-indigo-200/40 blur-3xl" />
             <p className="text-xs font-semibold tracking-[0.2em] text-slate-500">PROJECT BRIEF</p>
 
