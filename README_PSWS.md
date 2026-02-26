@@ -103,3 +103,17 @@ npm run lint
 npm run check:pr:binaries
 npm run check:pr:binaries:branch
 ```
+
+## 9) Buy System pages
+- List page: `app/buy-system/page.tsx`
+- Detail page: `app/buy-system/[slug]/page.tsx`
+- Data source: `data/systems.ts` (duplicate an item to add new systems).
+
+## 10) Contact prefill links
+Use query params to prefill contact page:
+
+```
+/contact?subject=Mart%20Management%20System&message=Hi%2C%20I%20want%20to%20discuss...
+```
+
+Slug helper route is available: `/contact/[slug]` (auto-redirects to prefilled query).

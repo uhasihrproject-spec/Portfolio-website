@@ -437,7 +437,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                   <div className="h-px w-full bg-violet-100" />
                   <div className="mt-6 grid gap-3">
                     <Link
-                      href="/contact"
+                      href={`/contact?subject=${encodeURIComponent(project.title)}&message=${encodeURIComponent(`Hi, I want a project like ${project.title}.`)}`}
                       className="w-full inline-flex items-center justify-between rounded-full border border-violet-200 bg-violet-50 px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-violet-100 transition"
                     >
                       Request similar <span>→</span>
@@ -470,7 +470,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
 
               <div className="mt-10 grid gap-3">
                 <Link
-                  href="/contact"
+                  href={`/contact?subject=${encodeURIComponent(project.title)}&message=${encodeURIComponent(`Hi, I want a project like ${project.title}.`)}`}
                   className="w-full inline-flex items-center justify-between rounded-full border border-violet-200 bg-violet-50 px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-violet-100 transition"
                 >
                   Request similar <span>→</span>

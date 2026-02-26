@@ -116,8 +116,9 @@ function WorkCard({
           ))}
         </div>
 
-        <div className="mt-5 text-sm font-semibold text-slate-800">
-          View case study <span className="inline-block transition group-hover:translate-x-0.5">→</span>
+        <div className="mt-5 flex items-center justify-between gap-3">
+          <span className="text-sm font-semibold text-slate-800">View case study <span className="inline-block transition group-hover:translate-x-0.5">→</span></span>
+          <span className="rounded-full border border-violet-200 bg-white px-3 py-1 text-[11px] font-semibold text-indigo-600">Contact prefill enabled</span>
         </div>
       </div>
     </Link>

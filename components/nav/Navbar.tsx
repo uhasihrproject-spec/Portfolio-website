@@ -1,363 +1,94 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Container from "@/components/ui/Container";
 
-function cx(...a: Array<string | false | null | undefined>) {
-  return a.filter(Boolean).join(" ");
-}
-
-const BRAND = "Prem Studio"; // change anytime
+const BRAND = "Prem Studio";
 
 const navLinks = [
+  { href: "/", label: "Home" },
   { href: "/work", label: "Work" },
+  { href: "/buy-system", label: "Buy System" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
-const services = [
-  { href: "/work?cat=Web", label: "Websites", desc: "Fast, premium builds" },
-  { href: "/work?cat=Graphics", label: "Graphics", desc: "Posters, templates, decks" },
-  { href: "/work?cat=Branding", label: "Branding", desc: "Identity system + rules" },
-  { href: "/work?cat=Systems", label: "Systems", desc: "Dashboards & workflows" },
-];
-
-function Brand() {
-  return (
-    <Link href="/" className="inline-flex items-center gap-2">
-      <span className="text-slate-900 font-semibold tracking-[-0.02em]">
-        {BRAND}
-        <span className="text-[var(--mint)]">.</span>
-      </span>
-    </Link>
-  );
+function isActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-function UnderlineLink({ href, label }: { href: string; label: string }) {
+function NavLink({ href, label, pathname, onClick }: { href: string; label: string; pathname: string; onClick?: () => void }) {
+  const active = isActive(pathname, href);
+
   return (
-    <Link
-      href={href}
-      className="relative text-sm font-medium text-slate-700 hover:text-slate-900 transition
-                 after:absolute after:left-0 after:-bottom-2 after:h-px after:w-0 after:bg-white/70
-                 hover:after:w-full after:transition-all after:duration-300"
-    >
+    <Link href={href} onClick={onClick} className="relative px-1 py-1 text-sm font-medium text-slate-700 hover:text-slate-900 transition">
       {label}
+      <span
+        className={`absolute left-0 -bottom-1 h-[2px] rounded-full bg-indigo-600 transition-all duration-300 ${
+          active ? "w-full" : "w-0 group-hover:w-full"
+        }`}
+      />
     </Link>
-  );
-}
-
-function GlowLoop({ strength = "strong" }: { strength?: "soft" | "strong" }) {
-  const a = strength === "strong" ? 0.28 : 0.18;
-  const b = strength === "strong" ? 0.24 : 0.14;
-  const grid = strength === "strong" ? 0.08 : 0.06;
-
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <motion.div
-        className="absolute -left-44 -top-40 h-[520px] w-[520px]"
-        animate={{ x: [-40, 40, -40], y: [0, 20, 0] }}
-        transition={{ duration: 9.5, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          background: `radial-gradient(circle at 40% 40%, rgba(109,94,252,${a}), transparent 62%)`,
-        }}
-      />
-      <motion.div
-        className="absolute -right-56 -top-52 h-[660px] w-[660px]"
-        animate={{ x: [34, -34, 34], y: [0, -22, 0] }}
-        transition={{ duration: 11.5, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          background: `radial-gradient(circle at 45% 45%, rgba(59,130,246,${b}), transparent 62%)`,
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          opacity: grid,
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)",
-          backgroundSize: "170px 170px",
-        }}
-      />
-    </div>
-  );
-}
-
-/** Desktop dropdown ONLY for Services */
-function ServicesDropdown({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
-  const reduce = useReducedMotion();
-
-  return (
-    <AnimatePresence>
-      {open && (
-        <>
-          <motion.button
-            aria-label="Close dropdown"
-            className="fixed inset-0 z-40 bg-white/70 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-          />
-
-          <motion.div
-            className="fixed left-0 right-0 top-[64px] z-50 border-b border-violet-200 bg-white/90 backdrop-blur-xl"
-            initial={reduce ? { opacity: 0 } : { y: -10, opacity: 0 }}
-            animate={reduce ? { opacity: 1 } : { y: 0, opacity: 1 }}
-            exit={reduce ? { opacity: 0 } : { y: -8, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="absolute inset-0">
-              <GlowLoop strength="soft" />
-              <div className="absolute inset-0 bg-white/70" />
-            </div>
-
-            <Container className="relative z-10 py-6">
-              <div className="grid gap-3 sm:grid-cols-2">
-                {services.map((s) => (
-                  <Link
-                    key={s.href}
-                    href={s.href}
-                    onClick={onClose}
-                    className="group border border-violet-200 bg-violet-50 p-4 hover:bg-violet-100 transition"
-                  >
-                    <div className="flex items-center justify-between gap-4">
-                      <p className="text-sm font-semibold text-slate-900">{s.label}</p>
-                      <span className="text-slate-400 group-hover:translate-x-0.5 transition">→</span>
-                    </div>
-                    <p className="mt-1 text-xs text-slate-500">{s.desc}</p>
-                  </Link>
-                ))}
-              </div>
-            </Container>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
-  );
-}
-
-/** ✅ Fullscreen mobile menu (WOW) */
-function MobileFullscreenMenu({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
-  const reduce = useReducedMotion();
-
-  // lock scroll
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [open]);
-
-  // ESC
-  useEffect(() => {
-    if (!open) return;
-    const fn = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", fn);
-    return () => window.removeEventListener("keydown", fn);
-  }, [open, onClose]);
-
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-[60]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          {/* fullscreen base */}
-          <motion.div
-            className="absolute inset-0 bg-white"
-            initial={reduce ? false : { opacity: 0 }}
-            animate={reduce ? {} : { opacity: 1 }}
-            exit={reduce ? {} : { opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          />
-
-          {/* wow background */}
-          <div className="pointer-events-none absolute inset-0">
-            <GlowLoop strength="strong" />
-            <div className="absolute inset-0 bg-white/70" />
-            {/* BIG watermark */}
-            <div className="absolute left-4 right-4 top-6 select-none">
-              <div className="text-[44px] leading-[0.9] font-semibold tracking-[-0.05em] text-slate-200">
-                {BRAND.toUpperCase()}
-              </div>
-            </div>
-          </div>
-
-          {/* content sheet with smooth slide */}
-          <motion.div
-            className="relative h-full"
-            initial={reduce ? { opacity: 0 } : { y: 26, opacity: 0 }}
-            animate={reduce ? { opacity: 1 } : { y: 0, opacity: 1 }}
-            exit={reduce ? { opacity: 0 } : { y: 18, opacity: 0 }}
-            transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {/* top bar */}
-            <div className="border-b border-violet-200 bg-white/70 backdrop-blur-xl">
-              <Container className="h-16 flex items-center justify-between">
-                <Brand />
-                <button
-                  onClick={onClose}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-violet-200 bg-violet-50 text-slate-900 hover:bg-violet-100 transition"
-                  aria-label="Close menu"
-                >
-                  ✕
-                </button>
-              </Container>
-            </div>
-
-            <Container className="pt-10 pb-8">
-              {/* main links (big + premium) */}
-              <div className="grid gap-3">
-                {navLinks.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    onClick={onClose}
-                    className="group flex items-center justify-between rounded-2xl border border-violet-200 bg-violet-50 px-5 py-4 text-slate-900/90 hover:bg-violet-100 transition"
-                  >
-                    <span className="text-lg font-semibold">{l.label}</span>
-                    <span className="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-                  </Link>
-                ))}
-              </div>
-
-              {/* services section */}
-              <div className="mt-8">
-                <p className="text-xs font-semibold tracking-[0.22em] text-slate-500">
-                  SERVICES
-                </p>
-                <div className="mt-3 grid gap-2">
-                  {services.map((s) => (
-                    <Link
-                      key={s.href}
-                      href={s.href}
-                      onClick={onClose}
-                      className="border border-violet-200 bg-violet-50 px-5 py-4 text-slate-800 hover:bg-violet-100 hover:text-slate-900 transition"
-                    >
-                      <div className="flex items-center justify-between gap-4">
-                        <p className="text-sm font-semibold">{s.label}</p>
-                        <span className="text-slate-400">→</span>
-                      </div>
-                      <p className="mt-1 text-xs text-slate-500">{s.desc}</p>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* CTA row */}
-              <div className="mt-8 grid gap-3">
-                <Link
-                  href="/contact"
-                  onClick={onClose}
-                  className="inline-flex items-center justify-center rounded-full bg-[var(--mint)] px-6 py-3.5 text-sm font-semibold text-slate-900 hover:brightness-95 transition"
-                >
-                  Request a quote
-                </Link>
-                <Link
-                  href="/work"
-                  onClick={onClose}
-                  className="inline-flex items-center justify-center rounded-full border border-violet-200 bg-violet-50 px-6 py-3.5 text-sm font-semibold text-slate-900 hover:bg-violet-100 transition"
-                >
-                  View work
-                </Link>
-              </div>
-
-              {/* bottom mini line */}
-              <div className="mt-10 pt-6 border-t border-violet-200 text-xs text-slate-500 flex items-center justify-between">
-                <span>Accra • Remote-ready</span>
-                <span>ankaraauragh@gmail.com</span>
-              </div>
-            </Container>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
   );
 }
 
 export default function Navbar() {
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <header className="sticky top-0 z-50">
-        <div className="relative border-b border-violet-200 bg-white/70 backdrop-blur-xl">
-          <GlowLoop strength="soft" />
-          <div className="absolute inset-0 bg-white/70" />
+    <header className="sticky top-0 z-50 border-b border-violet-200/80 bg-white/80 backdrop-blur-xl">
+      <Container className="h-16 flex items-center justify-between">
+        <Link href="/" className="font-semibold tracking-[-0.02em] text-slate-900">
+          {BRAND}
+          <span className="text-indigo-600">.</span>
+        </Link>
 
-          <Container className="relative z-10 h-16 flex items-center justify-between gap-5">
-            <Brand />
-
-            {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-7">
-              <button
-                type="button"
-                onClick={() => setServicesOpen((v) => !v)}
-                className={cx(
-                  "relative text-sm font-medium transition",
-                  servicesOpen ? "text-slate-900" : "text-slate-700 hover:text-slate-900"
-                )}
-              >
-                Services
-                <span className={cx("ml-2 inline-block transition", servicesOpen && "rotate-180")}>▾</span>
-                <span
-                  className={cx(
-                    "absolute left-0 -bottom-2 h-px bg-white/70 transition-all duration-300",
-                    servicesOpen ? "w-full" : "w-0"
-                  )}
-                />
-              </button>
-
-              {navLinks.map((l) => (
-                <UnderlineLink key={l.href} href={l.href} label={l.label} />
-              ))}
-            </nav>
-
-            {/* Right */}
-            <div className="flex items-center gap-3">
-              <Link
-                href="/contact"
-                className="hidden sm:inline-flex items-center justify-center rounded-full border border-violet-200 bg-violet-50 px-5 py-2.5 text-sm font-semibold text-slate-900 hover:bg-violet-100 transition"
-              >
-                Get a quote
-              </Link>
-
-              <button
-                onClick={() => setMobileOpen(true)}
-                className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-violet-200 bg-violet-50 text-slate-900 hover:bg-violet-100 transition"
-                aria-label="Open menu"
-              >
-                ☰
-              </button>
+        <nav className="hidden md:flex items-center gap-7">
+          {navLinks.map((l) => (
+            <div key={l.href} className="group">
+              <NavLink href={l.href} label={l.label} pathname={pathname} />
             </div>
-          </Container>
-        </div>
-      </header>
+          ))}
+        </nav>
 
-      <ServicesDropdown open={servicesOpen} onClose={() => setServicesOpen(false)} />
-      <MobileFullscreenMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
-    </>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/contact"
+            className="hidden sm:inline-flex items-center rounded-full bg-[var(--mint)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_35px_rgba(79,70,229,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_45px_rgba(79,70,229,0.45)]"
+          >
+            Let&apos;s Talk
+          </Link>
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-violet-200 bg-white text-slate-900"
+            aria-label="Toggle menu"
+          >
+            {open ? "✕" : "☰"}
+          </button>
+        </div>
+      </Container>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="md:hidden border-t border-violet-200 bg-white/95"
+          >
+            <Container className="py-4 flex flex-col gap-3">
+              {navLinks.map((l) => (
+                <NavLink key={l.href} href={l.href} label={l.label} pathname={pathname} onClick={() => setOpen(false)} />
+              ))}
+            </Container>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }

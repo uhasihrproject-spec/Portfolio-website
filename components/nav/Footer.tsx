@@ -95,6 +95,9 @@ export default function Footer() {
               <Link className="text-slate-600 hover:text-slate-900 transition" href="/about">
                 About
               </Link>
+              <Link className="text-slate-600 hover:text-slate-900 transition" href="/buy-system">
+                Buy System
+              </Link>
               <Link className="text-slate-600 hover:text-slate-900 transition" href="/contact">
                 Contact
               </Link>
