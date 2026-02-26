@@ -5,12 +5,13 @@ export type SystemProduct = {
   audience: string;
   priceFrom: string;
   highlights: string[];
-  image?: string;
+  dashboardImage?: string;
+  homepagePreviewImage?: string;
 };
 
 /**
  * Easy add: duplicate an object and change fields.
- * Optional image path: /public/systems/<slug>.png
+ * Add real screenshots later in /public/systems/<slug>/
  */
 export const SYSTEM_PRODUCTS: SystemProduct[] = [
   {
@@ -39,6 +40,10 @@ export const SYSTEM_PRODUCTS: SystemProduct[] = [
   },
 ];
 
-export function getSystemImage(system: SystemProduct) {
-  return system.image;
+export function getSystemDashboardImage(system: SystemProduct) {
+  return system.dashboardImage || `/systems/${system.slug}/dashboard.png`;
+}
+
+export function getSystemHomepagePreviewImage(system: SystemProduct) {
+  return system.homepagePreviewImage || `/systems/${system.slug}/home.png`;
 }
