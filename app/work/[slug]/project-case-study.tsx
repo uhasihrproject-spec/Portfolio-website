@@ -8,6 +8,7 @@ import { ExternalLink, X } from "lucide-react";
 import Container from "@/components/ui/Container";
 import type { Project } from "@/data/projects";
 import { CASE_STUDIES } from "@/data/caseStudies";
+import { TEAM_MEMBERS } from "@/data/team";
 
 function categoryAccent(cat: Project["category"]) {
   if (cat === "Web") return "rgba(109,94,252,0.22)";
@@ -138,6 +139,11 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
   const solved = cs?.solved || "Add how you solved it for this project.";
   const did = cs?.did || "Add what it did / outcome for this project.";
   const delivered = cs?.delivered?.length ? cs.delivered : ["Add deliverables."];
+
+  const leadMember = TEAM_MEMBERS.find((m) => m.slug === project.leadMemberSlug);
+  const acknowledgement = leadMember
+    ? `Project lead: ${leadMember.name}. Built as a full team collaboration.`
+    : "Built as a team collaboration.";
 
   // Background thumb
   const thumb = useFallbackImageSrc([
@@ -281,6 +287,10 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
 
             <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
               {project.blurb}
+            </p>
+
+            <p className="mt-4 inline-flex rounded-full border border-violet-200 bg-white/85 px-4 py-2 text-xs font-semibold tracking-[0.06em] text-slate-700">
+              {acknowledgement}
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2">

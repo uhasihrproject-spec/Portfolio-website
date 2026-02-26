@@ -17,6 +17,7 @@ export type Project = {
    * Default used when omitted: /public/projects/<slug>/
    */
   imageFolder?: string;
+  leadMemberSlug?: string;
 };
 
 /**
@@ -37,6 +38,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     blurb: "A polished visual identity system built for consistent brand recognition.",
     tags: ["Identity", "Brand Guide", "Print + Social"],
+    leadMemberSlug: "makenzy-amartey",
   },
   {
     slug: "mint-studio-website",
@@ -45,6 +47,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     blurb: "Fast, minimal, conversion-focused website with calm motion.",
     tags: ["Next.js", "UI", "Performance"],
+    leadMemberSlug: "eldwin-asante",
   },
   {
     slug: "brand-kit-ankara",
@@ -53,6 +56,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     blurb: "Logo rules, typography pairing, and a color system that stays consistent.",
     tags: ["Logo", "Typography", "Guidelines"],
+    leadMemberSlug: "makenzy-amartey",
   },
   {
     slug: "social-pack-launch",
@@ -61,6 +65,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     blurb: "Templates that keep content clean and recognizable.",
     tags: ["Templates", "Consistency", "Export-ready"],
+    leadMemberSlug: "daniel-adjetey",
   },
   {
     slug: "admin-dashboard-lite",
@@ -69,6 +74,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     blurb: "Clean workflow with roles, records, and simple reporting.",
     tags: ["Roles", "CRUD", "UX"],
+    leadMemberSlug: "eldwin-asante",
   },
   {
     slug: "portfolio-revamp",
@@ -77,6 +83,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     blurb: "Improved layout, trust, and a stronger story for client conversion.",
     tags: ["Layout", "Copy", "Brand"],
+    leadMemberSlug: "malcolm-elih",
   },
   {
     slug: "flyer-series",
@@ -85,6 +92,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     blurb: "Bold, clean flyers designed for both print and social.",
     tags: ["Print", "Social", "Grid"],
+    leadMemberSlug: "daniel-adjetey",
   },
   {
     slug: "event-brand-rollout",
@@ -93,6 +101,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     blurb: "Campaign artwork system for event banners, stories, and promo assets.",
     tags: ["Campaign", "Posters", "Assets"],
+    leadMemberSlug: "daniel-adjetey",
   },
 ];
 
