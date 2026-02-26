@@ -1,50 +1,16 @@
-<<<<<<< HEAD
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import Container from "@/components/ui/Container";
-import { PROJECTS, getProjectCover } from "@/data/projects";
-import { TEAM_MEMBERS } from "@/data/team";
-import ContactFlipCards from "./contact-flip-cards";
-=======
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import { TEAM_MEMBERS } from "@/data/team";
->>>>>>> origin/main
 
 export default async function TeamMemberPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
   const p = await Promise.resolve(params);
   const member = TEAM_MEMBERS.find((m) => m.slug === p.slug);
   if (!member) return notFound();
 
-<<<<<<< HEAD
-  const featuredProject = PROJECTS.find((x) => x.slug === member.featuredProjectSlug) || PROJECTS[0];
-  const memberProjects = PROJECTS.filter((x) => x.leadMemberSlug === member.slug);
-
-  return (
-    <section className="relative overflow-hidden border-t border-violet-200 bg-white/70">
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-white/70" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(109,94,252,0.18),transparent_55%),radial-gradient(circle_at_88%_12%,rgba(59,130,246,0.14),transparent_48%)]" />
-        <div className="absolute inset-0">
-          <Image
-            src={getProjectCover(featuredProject)}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover scale-110"
-            style={{ opacity: 0.1, filter: "blur(14px) saturate(1.03) contrast(1.02)" }}
-          />
-        </div>
-      </div>
-
-=======
   return (
     <section className="relative overflow-hidden border-t border-violet-200">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(109,94,252,0.18),transparent_55%),radial-gradient(circle_at_88%_12%,rgba(59,130,246,0.14),transparent_48%)]" />
->>>>>>> origin/main
       <Container className="relative z-10 py-14 sm:py-20">
         <Link href="/about" className="text-xs font-semibold tracking-[0.2em] text-slate-500 hover:text-slate-900">← BACK TO TEAM</Link>
 
@@ -76,23 +42,6 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ slu
                 <a href={`mailto:${member.email}`} className="inline-flex items-center rounded-full border border-violet-200 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-violet-50 transition">Email</a>
               ) : null}
             </div>
-<<<<<<< HEAD
-
-            <ContactFlipCards phone={member.phone} whatsapp={member.whatsapp} />
-          </div>
-        </div>
-
-        <div className="mt-12 rounded-[24px] border border-violet-200 bg-white/90 p-6">
-          <p className="text-xs font-semibold tracking-[0.2em] text-slate-500">PROJECT ACKNOWLEDGEMENT</p>
-          <p className="mt-2 text-slate-700">The following projects were mostly led by {member.name}, while still delivered as team collaborations.</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {memberProjects.length ? memberProjects.map((proj) => (
-              <Link key={proj.slug} href={`/work/${proj.slug}`} className="rounded-full border border-violet-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-violet-50">
-                {proj.title}
-              </Link>
-            )) : <p className="text-sm text-slate-500">No assigned projects yet.</p>}
-=======
->>>>>>> origin/main
           </div>
         </div>
       </Container>
